@@ -1,6 +1,6 @@
 
 import './App.css';
-// import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from './actions';
 import User from './components/User';
@@ -35,6 +35,10 @@ function App() {
   // const displayUsers = () => {
   //   return users[0].username
   // }
+  
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [])
 
 
   return (
@@ -42,7 +46,7 @@ function App() {
       <Navbar />
       <button onClick={() => dispatch(getUsers())}>Get users in state</button>
 
-      <HomeContainer />
+      {/* <HomeContainer /> */}
       <LoginForm />
 
 

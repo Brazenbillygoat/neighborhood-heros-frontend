@@ -38,7 +38,7 @@ function LoginForm() {
       },
       body: JSON.stringify(login)
     })
-    .then(res => res)
+    .then(res => res.json())
     .then(user => console.log(user))
     // console.log(res.json())
     // console.log(currentUser)

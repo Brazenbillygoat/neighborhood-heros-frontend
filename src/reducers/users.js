@@ -1,18 +1,30 @@
 
-  let users;
-  
-  const getUsers = async () => { 
-    let response = await fetch('http://localhost:3000/users')
-  let dbUsers = await response.json()
-  users = dbUsers
+//   const users = []
+
+const getUsers = () => { 
+  // return fetch('http://localhost:3000/users')
+  // .then(res => res.json())
+  // .then(users => {
+  //   console.log(users)
+  //   return users
+  // })
+  return "test"
 }
 
-getUsers();
+// getUsers();
 
 const usersReducer = (state = [], action) => {
   switch(action.type){
     case 'GETUSERS':
-      return users
+      return [...state, getUsers()];
+      // fetch('http://localhost:3000/users')
+      // .then(res => res.json())
+      // .then(users => {
+      //   console.log(users)
+      //   debugger
+      //   state = [...state, users]
+      // })
+      return state;
     default:
       return state;
   };
