@@ -13,24 +13,24 @@ function Navbar() {
 
   return (
 
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="home-link-navbar" href="#">Neighborhood<br/>Heros</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
+  <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+    <a className="home-link-navbar" href="#">Neighborhood<br/>Heros</a>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span className="navbar-toggler-icon"></span>
     </button>
-    <a class="login-signup-toggle" onClick={() => dispatch(signupOrLogin())}>
+    <a className="login-signup-toggle" onClick={() => dispatch(signupOrLogin())}>
         <span>{showLoginOrSignup()}</span>
       </a>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+    <div className="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <a className="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Link</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Link</a>
         </li>    
       </ul>
     </div>  

@@ -21,27 +21,28 @@ function LoginForm() {
         myConfirmPassword
         && 
         myPassword !== myConfirmPassword) {
-      return <small class="signup-password-validation">Passwords must match.</small>
+      return <small className="signup-password-validation">Passwords must match.</small>
     }
   }
 
-  const logUserIn = async () => {
+  const logUserIn = () => {
     let login = {
       name: myUsername,
       password: myPassword
     }
 
-    const res = await fetch(`${baseUrl}/home`, {
+    fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(login)
     })
-    const currentUser = await res.json()
-    console.log(currentUser)
+    .then(res => res)
+    .then(user => console.log(user))
+    // console.log(res.json())
+    // console.log(currentUser)
   }
-
 
   const passwordConfirmation = () => {
     if (!userExists) {
@@ -82,7 +83,7 @@ function LoginForm() {
   return (
     <div>
 
-        <form onSubmit={(e) => console.log(e.target.value)}>
+        <form onSubmit={() => logUserIn()}>
           <h2 className="login-header">{showLoginOrSignup()}</h2>
           <label>
             <h4>Username:</h4>
