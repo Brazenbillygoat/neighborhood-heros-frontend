@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +35,41 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+/* NAVBAR */
+
+.login-signup-toggle {
+  color: rgb(179, 255, 0);
+  font-size: 1.5rem;
+  position: absolute;
+  right: 3rem;
 }
+.login-signup-toggle:hover {
+  color: yellow;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.home-link-navbar {
+  color: rgb(179, 255, 0);
+  font-size: large;
+  font-weight: bold;
+  position: relative;
+  left: 1rem;
+}
+.home-link-navbar:hover {
+  color: yellow;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
+/* LOGIN/SIGNUP FORM */
+
+.signup-password-validation {
+  font-size: 1rem;
+  color: red;
+}
+
