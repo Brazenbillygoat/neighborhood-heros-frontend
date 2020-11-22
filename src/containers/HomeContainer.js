@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { showUser } from '../actions/showUser'
 
-class HomeContainer extends Component {
+export class HomeContainer extends Component {
 
   createUserList() {
     return this.props.users.map((user) => {
@@ -17,6 +17,7 @@ class HomeContainer extends Component {
     return (
       <div>
         {this.createUserList()}
+        <h1>welcome Home</h1>
       </div>
     )
   }
@@ -35,4 +36,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

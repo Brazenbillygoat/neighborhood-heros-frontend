@@ -1,6 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { signupOrLogin } from '../actions/loginForm';
+import { Link } from 'react-router-dom';
 
 
 function Navbar() {
@@ -21,19 +22,20 @@ function Navbar() {
     <a className="login-signup-toggle" onClick={() => dispatch(signupOrLogin())}>
         <span>{showLoginOrSignup()}</span>
       </a>
-    {/* <div className="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul className="navbar-nav">
+    <div>
+      <ul>
         <li className="nav-item">
+          <Link to="/home">Home</Link>
+          <Link to="/login">Login</Link>
+        </li>
+        {/* <li className="nav-item">
           <a className="nav-link" href="#">Link</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Link</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Link</a>
-        </li>    
+        </li>     */}
       </ul>
-    </div>   */}
+    </div>  
   </nav>
 
 )}
