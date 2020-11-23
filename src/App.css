@@ -2,41 +2,9 @@
   text-align: center;
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin-top: 8rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
 
 /* NAVBAR */
 
@@ -64,9 +32,47 @@
   cursor: pointer;
   text-decoration: none;
 }
+.home-link-navbar:visited, .home-link-navbar:focus {
+  color: rgb(179, 255, 0);
+  font-size: large;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  left: 1rem;
+  text-decoration: none;
+}
+
+.navbar-sublink {
+  color: rgb(179, 255, 0);
+  text-decoration: none;
+}
+.navbar-sublink:hover {
+  color: yellow;
+  text-decoration: none;
+}
+.navbar-sublink:visited {
+  text-decoration: none;
+}
+.navbar-sublink:focus {
+  color: yellow;
+  text-decoration: none;
+}
+
+.navbar-list-item {
+  color: rgb(179, 255, 0);
+  display: inline-block;
+  float: left;
+  font-size: 1.5rem;
+  margin: 0 2rem 1rem;
+  text-decoration: none;
+}
+
 
 .my-nav {
   background-color: rgb(48, 47, 47);
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 

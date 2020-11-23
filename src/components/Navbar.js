@@ -15,7 +15,7 @@ function Navbar() {
   return (
 
   <nav className="navbar navbar-expand-md my-nav">
-    <a className="home-link-navbar" href="#">Neighborhood<br/>Heros</a>
+    <Link className="home-link-navbar" to="/home">Neighborhood<br/>Heros</Link>
     {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span className="navbar-toggler-icon"></span>
     </button> */}
@@ -23,18 +23,18 @@ function Navbar() {
         <span>{showLoginOrSignup()}</span>
       </a>
     <div>
-      <ul>
-        <li className="nav-item">
-          <Link to="/home">Home</Link>
-          <Link to="/login">Login</Link>
-        </li>
-        {/* <li className="nav-item">
-          <a className="nav-link" href="#">Link</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Link</a>
-        </li>     */}
-      </ul>
+        <p className="navbar-list-item">
+          <Link className="navbar-sublink" to="/home">Home</Link>
+        </p>
+        <p className="navbar-list-item">
+          <Link className="navbar-sublink" to="/login">Login</Link>
+        </p>
+        <p className="navbar-list-item">
+        <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
+        </p>
+        <p className="navbar-list-item">
+          <Link className="navbar-sublink" to="/users">See users</Link>
+        </p>    
     </div>  
   </nav>
 

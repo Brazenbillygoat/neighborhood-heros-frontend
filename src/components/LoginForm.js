@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
-import { username, password, confirmPassword, signupOrLogin } from '../actions/loginForm';
-import userExists from '../reducers/userExists';
+import { username, password, confirmPassword } from '../actions/loginForm';
+// import userExists from '../reducers/userExists';
 
 
 function LoginForm() {
@@ -105,3 +105,5 @@ function LoginForm() {
 
 
 export default LoginForm;
+
+

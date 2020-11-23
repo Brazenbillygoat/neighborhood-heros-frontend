@@ -1,4 +1,6 @@
 
+import {combineReducers} from 'redux';
+
 import counterReducer from './counter';
 import loggedReducer from './isLogged';
 import usersReducer from './users';
@@ -7,7 +9,7 @@ import passwordReducer from './password';
 import confirmPasswordReducer from './confirmPassword';
 import userExistsReducer from './userExists';
 import selectedUser from './showUser';
-import {combineReducers} from 'redux';
+import tournament from './tournamentReducers';
 
 const allReducers = combineReducers({
   counter: counterReducer,
@@ -17,7 +19,8 @@ const allReducers = combineReducers({
   password: passwordReducer,
   confirmPassword: confirmPasswordReducer,
   userExists: userExistsReducer,
-  selectedUser: selectedUser
+  selectedUser: selectedUser,
+  tournament: tournament
 })
 
 export default allReducers;

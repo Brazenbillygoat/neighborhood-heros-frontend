@@ -1,36 +1,22 @@
 
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-// class User extends Component {
-
-//   createUserList() {
-//     debugger
-//     return this.props.users.map((user) => {
-//       return(
-//         <p>{user.username}</p>
-//       )
-//     })
-//   }
-
-//   render() {
-
-//     return(
-//       <div>
-//         {this.createUserList()}
-//       </div>
-
-//     )
-//   }
-// }
+function User() {
+  const myUsername = useSelector(state => state.username);
+  const users = useSelector(state => state.users);
 
 
-// const mapStateToProps = (state) => {
-//   return (
-//     users: state.users
+  // useEffect(() => {
+  //   fetch()
+  // }, [])
 
-//   )
-// }
+  return(
+    <div>
 
-// export default connect(mapStateToProps)(User);
+
+
+    </div>
+  )
+
+}
 
