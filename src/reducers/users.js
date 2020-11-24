@@ -1,13 +1,13 @@
 
-  let allUsers;
+//   let allUsers;
 
-const getUsers = () => { 
-  return fetch('http://localhost:3000/users')
-  .then(res => res.json())
-  .then(users => {
-    allUsers = users;
-  })
-}
+// const getUsers = () => { 
+//   return fetch('http://localhost:3000/users')
+//   .then(res => res.json())
+//   .then(users => {
+//     allUsers = users;
+//   })
+// }
 
 // getUsers();
 

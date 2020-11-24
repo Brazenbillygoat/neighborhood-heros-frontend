@@ -9,7 +9,8 @@ import passwordReducer from './password';
 import confirmPasswordReducer from './confirmPassword';
 import userExistsReducer from './userExists';
 import selectedUser from './showUser';
-import tournament from './tournamentReducers';
+import tournament from './tournamentReducer';
+import tournaments from './tournamentsReducer';
 
 const allReducers = combineReducers({
   counter: counterReducer,
@@ -20,7 +21,8 @@ const allReducers = combineReducers({
   confirmPassword: confirmPasswordReducer,
   userExists: userExistsReducer,
   selectedUser: selectedUser,
-  tournament: tournament
+  tournament: tournament,
+  tournaments: tournaments
 })
 
 export default allReducers;

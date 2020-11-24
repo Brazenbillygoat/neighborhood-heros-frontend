@@ -3,6 +3,7 @@ import './App.css';
 // import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from './actions';
+import { getTournaments } from './actions/tournaments';
 import { Route, Switch, } from 'react-router';
 
 import UserContainer from './containers/UserContainer';
@@ -11,6 +12,7 @@ import Navbar from './components/Navbar';
 import TournamentForm from './components/TournamentForm';
 
 import HomeContainer from './containers/HomeContainer';
+import TournamentContainer from './containers/TournamentContainer';
 
 // const loggedIn = () => {
 //   if (localStorage.getItem("token") == "true") {
@@ -56,6 +58,7 @@ function App() {
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/tournament/new" component={TournamentForm} />
         <Route exact path="/users" component={UserContainer} />
+        <Route exact path="/tournaments" component={TournamentContainer} />
       </Switch>
       {/* <LoginForm /> */}
 

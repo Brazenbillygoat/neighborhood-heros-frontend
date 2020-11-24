@@ -31,8 +31,11 @@ function Navbar() {
         <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
       </p>
       <p className="navbar-list-item">
-        <Link className="navbar-sublink" to="/users">See users</Link>
-      </p>    
+        <Link className="navbar-sublink" to="/users">See Users</Link>
+      </p>  
+      <p className="navbar-list-item">
+        <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
+      </p>  
     </div>  
   </nav>
 
