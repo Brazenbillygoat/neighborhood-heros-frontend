@@ -16,25 +16,23 @@ function Navbar() {
 
   <nav className="navbar navbar-expand-md my-nav">
     <Link className="home-link-navbar" to="/home">Neighborhood<br/>Heros</Link>
-    {/* <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span className="navbar-toggler-icon"></span>
-    </button> */}
-    <a className="login-signup-toggle" onClick={() => dispatch(signupOrLogin())}>
-        <span>{showLoginOrSignup()}</span>
-      </a>
+    <p>
+      <Link to="/login" 
+            className="login-signup-toggle"
+            onClick={() => dispatch(signupOrLogin())}>
+            <span>{showLoginOrSignup()}</span>
+      </Link>
+    </p>
     <div>
-        <p className="navbar-list-item">
-          <Link className="navbar-sublink" to="/home">Home</Link>
-        </p>
-        <p className="navbar-list-item">
-          <Link className="navbar-sublink" to="/login">Login</Link>
-        </p>
-        <p className="navbar-list-item">
+      <p className="navbar-list-item">
+        <Link className="navbar-sublink" to="/home">Home</Link>
+      </p>
+      <p className="navbar-list-item">
         <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
-        </p>
-        <p className="navbar-list-item">
-          <Link className="navbar-sublink" to="/users">See users</Link>
-        </p>    
+      </p>
+      <p className="navbar-list-item">
+        <Link className="navbar-sublink" to="/users">See users</Link>
+      </p>    
     </div>  
   </nav>
 

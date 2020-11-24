@@ -12,6 +12,7 @@ class UserContainer extends Component {
       return(
         <p key={user.id} onClick={() => this.props.showUser(user)}>{user.username}</p>
       )
+        // <button>Add Friend</button>
     })
   }
 

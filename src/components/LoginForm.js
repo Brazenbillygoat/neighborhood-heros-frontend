@@ -25,7 +25,8 @@ function LoginForm() {
     }
   }
 
-  const logUserIn = () => {
+  const logUserIn = (e) => {
+    e.preventDefault();
     let login = {
       name: myUsername,
       password: myPassword
@@ -39,9 +40,10 @@ function LoginForm() {
       body: JSON.stringify(login)
     })
     .then(res => res.json())
-    .then(user => console.log(user))
-    // console.log(res.json())
-    // console.log(currentUser)
+    .then(user => {
+      localStorage.setItem("myId", user.id)
+    })
+    
   }
 
   const passwordConfirmation = () => {
@@ -83,7 +85,7 @@ function LoginForm() {
   return (
     <div>
 
-        <form onSubmit={() => logUserIn()}>
+        <form onSubmit={logUserIn}>
           <h2 className="login-header">{showLoginOrSignup()}</h2>
           <label>
             <h4>Username:</h4>

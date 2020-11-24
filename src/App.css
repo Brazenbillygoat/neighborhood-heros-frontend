@@ -3,16 +3,17 @@
 }
 
 body {
-  margin-top: 8rem;
+  margin-top: 10rem;
 }
 
 /* NAVBAR */
 
-.login-signup-toggle {
+.login-signup-toggle, .login-signup-toggle:focus, .login-signup-toggle:active {
   color: rgb(179, 255, 0);
   font-size: 1.5rem;
   position: absolute;
   right: 3rem;
+  text-decoration: none;
 }
 .login-signup-toggle:hover {
   color: yellow;

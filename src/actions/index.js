@@ -12,8 +12,9 @@ export const decrement = () => {
   };
 };
 
-export const getUsers = () => {
+export const getUsers = (users) => {
   return {
-    type: 'GETUSERS'
+    type: 'GETUSERS',
+    payload: users
   }
 }

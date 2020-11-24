@@ -26,12 +26,31 @@ function App() {
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
   
+  const loggedIn = () => {
+    if (localStorage.getItem("myId")) {
+      // return <HomepageContainer />
+      fetch('http://localhost:3000/users')
+      .then(res => res.json())
+      .then(users => {
+        dispatch(getUsers(users));
+      })
+
+      fetch('http://localhost:3000/tournaments')
+      .then(res => res.json())
+      .then(tournaments => {
+        dispatch(getTournaments(tournaments));
+      })
+    }
+    // return <LoginContainer />
+  }
+
   localStorage.setItem("token", "true")
+
 
   return (
     <div className="App">
       <Navbar />
-      <button onClick={() => dispatch(getUsers())}>Get users in state</button>
+      {loggedIn()}
       <Switch>
         <Route exact path="/home" component={HomeContainer} />
         <Route exact path="/login" component={LoginForm} />

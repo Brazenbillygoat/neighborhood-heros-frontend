@@ -9,12 +9,12 @@ const getUsers = () => {
   })
 }
 
-getUsers();
+// getUsers();
 
 const usersReducer = (state = [], action) => {
   switch(action.type){
     case 'GETUSERS':
-      return allUsers;
+      return action.payload;
     default:
       return state;
   };
