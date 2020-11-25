@@ -84,3 +84,26 @@ body {
   color: red;
 }
 
+
+/* TOURNAMENT(S) */
+
+.tournament-list-item {
+  border: solid green;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  margin-left: 30%;
+  width: 40%;
+}
+
+.tournaments-container {
+  text-align: center;
+}
+
+.tournament-button {
+  background-color: rgb(187, 180, 180);
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  color: black;
+}

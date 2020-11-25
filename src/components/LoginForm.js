@@ -1,6 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { username, password, confirmPassword } from '../actions/loginForm';
+import { Redirect } from 'react-router-dom';
 // import userExists from '../reducers/userExists';
 
 
@@ -42,8 +43,9 @@ function LoginForm() {
     .then(res => res.json())
     .then(user => {
       localStorage.setItem("myId", user.id)
+      return <Redirect to="/home" />
     })
-    
+    // .catch((err) => console.log("error: ", err))
   }
 
   const passwordConfirmation = () => {

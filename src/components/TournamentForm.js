@@ -32,9 +32,7 @@ const TournamentForm = () => {
     })
     .then(res => res.json())
     .then(data => {
-
-      console.log(data)
-      console.log("Hello")
+      window.location.reload();
     })
   }
 

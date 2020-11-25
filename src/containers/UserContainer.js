@@ -6,14 +6,34 @@ import { bindActionCreators } from 'redux';
 
 
 class UserContainer extends Component {
+
+  beFriend = (e) => {
+    let friends = {
+      follower_id: localStorage.getItem("myId"),
+      followed_id: e.currentTarget.parentNode.getAttribute("myKey")
+    }
+    fetch('http://localhost:3000/relationship/friend', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(friends)
+    })
+    .then(res => res.json())
+    .then(friendship => {
+      console.log(friendship)
+    })
+  }
   
   createUserList() {
     return this.props.users.map((user) => {
       return(
-        <p key={user.id} onClick={() => this.props.showUser(user)}>{user.username}</p>
-      )
-        // <button>Add Friend</button>
-    })
+        <div key={user.id} myKey={user.id}>
+        <p onClick={() => this.props.showUser(user)}>{user.username}</p>
+        <button onClick={(e) => this.beFriend(e)}>Add Friend</button>
+        </div>
+      )}
+    )
   }
 
   render() {

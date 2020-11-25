@@ -1,27 +1,19 @@
 
 import './App.css';
-// import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from './actions';
 import { getTournaments } from './actions/tournaments';
 import { Route, Switch, } from 'react-router';
+// import { BrowserRouter } from 'react-router-dom';
 
-import UserContainer from './containers/UserContainer';
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import TournamentForm from './components/TournamentForm';
+import ShowTournament from './components/ShowTournament';
 
+import UserContainer from './containers/UserContainer';
 import HomeContainer from './containers/HomeContainer';
 import TournamentContainer from './containers/TournamentContainer';
-
-// const loggedIn = () => {
-//   if (localStorage.getItem("token") == "true") {
-//     // return <HomepageContainer />
-//   }
-//   // return <LoginContainer />
-// }
-
-
 
 
 function App() {
@@ -30,7 +22,6 @@ function App() {
   
   const loggedIn = () => {
     if (localStorage.getItem("myId")) {
-      // return <HomepageContainer />
       fetch('http://localhost:3000/users')
       .then(res => res.json())
       .then(users => {
@@ -43,7 +34,6 @@ function App() {
         dispatch(getTournaments(tournaments));
       })
     }
-    // return <LoginContainer />
   }
 
   localStorage.setItem("token", "true")
@@ -53,18 +43,16 @@ function App() {
     <div className="App">
       <Navbar />
       {loggedIn()}
-      <Switch>
-        <Route exact path="/home" component={HomeContainer} />
-        <Route exact path="/login" component={LoginForm} />
-        <Route exact path="/tournament/new" component={TournamentForm} />
-        <Route exact path="/users" component={UserContainer} />
-        <Route exact path="/tournaments" component={TournamentContainer} />
-      </Switch>
-      {/* <LoginForm /> */}
-
-      {/* <HomeContainer /> */}
-
-      {isLogged ? <p>Valuable Information I shouldn't see</p> : ''}
+      {/* <BrowserRouter> */}
+        <Switch>
+          <Route exact path="/home" component={HomeContainer} />
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/tournament/new" component={TournamentForm} />
+          <Route exact path="/users" component={UserContainer} />
+          <Route exact path="/tournaments" component={TournamentContainer} />
+          <Route exact path="/tournament" component={ShowTournament} />
+        </Switch>
+      {/* </BrowserRouter> */}
       
     </div>
   );

@@ -9,6 +9,9 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const showLoginOrSignup = () => {
+    if (localStorage.getItem("myId")) {
+      return <span onClick={() => localStorage.clear()}>Log out</span>
+    }
     return !userExists ? "Log in" : "Sign up"
   }
 
