@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const ShowTournament = () => {
 
+  const tournaments = useSelector(state => state.tournaments);
+  const tournament = useSelector(state => state.selectedTournament);
+  // const tasks = useSelector(state => state.tournaments.tasks);
+
 
   // const joinTournament = (e) => {
   //   let participant = {
@@ -23,18 +27,22 @@ const ShowTournament = () => {
   //   })
   // }
 
-  // const listUsers = () => {
-  //   let users = useSelector(state => state.tournaments.users)
-    
-  //   // return users.map(user) {
-  //   //   return <li>{user.name}</li>
-  //   // }
-  // }
+  const listUsers = () => {
+    for (const currentTournament of tournaments) {
+      if (tournament.id == currentTournament.id) {
 
-  // const listTasks = () => {
-  //   let tasks = useSelector(state => state.tournaments.tasks)
+        return currentTournament.users
+      }
+    }
+  }
 
-  // }
+  const listTasks = () => {
+    for (const currentTournament of tournaments) {
+      if (tournament.id == currentTournament.id) {
+        return <p>{currentTournament.tasks}</p>
+      }
+    }
+  }
 
     return(
       <div>
