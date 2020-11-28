@@ -43,7 +43,8 @@ function LoginForm() {
     .then(res => res.json())
     .then(user => {
       localStorage.setItem("myId", user.id)
-      return <Redirect to="/home" />
+      window.location.href="/home";
+      // return <Redirect to="/home" />
     })
     // .catch((err) => console.log("error: ", err))
   }

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 class TournamentContainer extends Component {
-
+  
 
   joinTournament = (e) => {
     let participant = {
@@ -34,7 +34,7 @@ class TournamentContainer extends Component {
           <h4>{tournament.name}</h4>
           <p>{tournament.description}</p>
           <button className="tournament-button btn" onClick={(e) => this.joinTournament(e)}>Join Tournament</button> 
-          <Link className="tournament-button btn" to={"/tournament"} onClick={() => this.props.showTournament(tournament)}>View Details</Link>
+          <Link className="tournament-button btn" onClick={() => this.props.showTournament(tournament)} to={`/tournament/${tournament.id}`}>View Details</Link>
         </div>
       )
     })
@@ -54,7 +54,8 @@ class TournamentContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tournaments: state.tournaments
+    tournaments: state.tournaments,
+    selectedTournament: state.selectedTournament
   }
 }
 

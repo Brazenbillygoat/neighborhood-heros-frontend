@@ -50,7 +50,7 @@ function App() {
           <Route exact path="/tournament/new" component={TournamentForm} />
           <Route exact path="/users" component={UserContainer} />
           <Route exact path="/tournaments" component={TournamentContainer} />
-          <Route exact path="/tournament" component={ShowTournament} />
+          <Route path="/tournament/:id" component={ShowTournament} />
         </Switch>
       {/* </BrowserRouter> */}
       

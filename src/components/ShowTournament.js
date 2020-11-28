@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { showTournament } from '../actions/tournaments';
 
 
 
@@ -6,7 +7,11 @@ const ShowTournament = () => {
 
   const tournaments = useSelector(state => state.tournaments);
   const tournament = useSelector(state => state.selectedTournament);
-  // const tasks = useSelector(state => state.tournaments.tasks);
+
+  const dispatch = useDispatch();
+
+  const tournamentId = parseInt(window.location.href.split("/").slice(-1).pop() - 0)
+
 
 
   // const joinTournament = (e) => {
@@ -27,26 +32,43 @@ const ShowTournament = () => {
   //   })
   // }
 
+
+  const getSelectedTournament = () => {
+    debugger
+    console.log(dispatch(showTournament(tournaments.find((tourney) => tourney.id == tournamentId))));
+  }
+
   const listUsers = () => {
     for (const currentTournament of tournaments) {
       if (tournament.id == currentTournament.id) {
-
-        return currentTournament.users
+        return currentTournament.users.map((user) => {
+          // debugger
+          return <p key={user.id}>{user.username}</p>
+        })
       }
     }
   }
 
   const listTasks = () => {
     for (const currentTournament of tournaments) {
-      if (tournament.id == currentTournament.id) {
-        return <p>{currentTournament.tasks}</p>
+      try {
+        if (tournament.id == currentTournament.id) {
+          currentTournament.tasks.map((task) => {
+            return <p key={task.id}>{task.name}</p>
+          })
+        }
+      } catch(err) {
+        console.log(err)
+        return <p>There are no tasks yet created for this tournament.</p>
       }
     }
   }
+  
 
     return(
       <div>
-        <h1>Hello competitor!</h1>
+        {/* {getSelectedTournament()} */}
+        <h1>{tournament.name}</h1>
         <ul>
           {listUsers()}
         </ul>

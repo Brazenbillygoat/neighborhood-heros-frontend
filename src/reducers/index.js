@@ -10,6 +10,7 @@ import selectedUser from './showUser';
 import tournament from './tournamentReducer';
 import tournaments from './tournamentsReducer';
 import selectedTournament from './tournamentReducer';
+import newTournamentReducer from './newTournamentReducer';
 
 const allReducers = combineReducers({
   isLogged: loggedReducer,
@@ -19,6 +20,7 @@ const allReducers = combineReducers({
   confirmPassword: confirmPasswordReducer,
   userExists: userExistsReducer,
   selectedUser: selectedUser,
+  newTournament: newTournamentReducer,
   tournament: tournament,
   tournaments: tournaments,
   selectedTournament: selectedTournament

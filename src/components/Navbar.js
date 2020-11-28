@@ -15,6 +15,24 @@ function Navbar() {
     return !userExists ? "Log in" : "Sign up"
   }
 
+  const isLoggedIn = () => {
+    if (localStorage.getItem("myId")) {
+      return (
+        <>
+          <p className="navbar-list-item">
+          <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
+          </p>
+          <p className="navbar-list-item">
+            <Link className="navbar-sublink" to="/users">See Users</Link>
+          </p>  
+          <p className="navbar-list-item">
+            <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
+          </p> 
+        </>
+      )
+    }
+  }
+
   return (
 
   <nav className="navbar navbar-expand-md my-nav">
@@ -30,15 +48,7 @@ function Navbar() {
       <p className="navbar-list-item">
         <Link className="navbar-sublink" to="/home">Home</Link>
       </p>
-      <p className="navbar-list-item">
-        <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
-      </p>
-      <p className="navbar-list-item">
-        <Link className="navbar-sublink" to="/users">See Users</Link>
-      </p>  
-      <p className="navbar-list-item">
-        <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
-      </p>  
+      {isLoggedIn()}
     </div>  
   </nav>
 
