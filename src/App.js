@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from './actions';
 import { getTournaments } from './actions/tournaments';
 import { Route, Switch, } from 'react-router';
-// import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
@@ -19,6 +19,14 @@ import TournamentContainer from './containers/TournamentContainer';
 function App() {
   const isLogged = useSelector(state => state.isLogged);
   const dispatch = useDispatch();
+
+  const logInOrHome = () => {
+    if (localStorage.getItem("myId")) {
+      return <Redirect to='home' />
+    } else {
+      return <Redirect to='login' />
+    }
+  }
   
   const loggedIn = () => {
     if (localStorage.getItem("myId")) {
@@ -44,6 +52,7 @@ function App() {
       <Navbar />
       {loggedIn()}
       {/* <BrowserRouter> */}
+      {logInOrHome()}
         <Switch>
           <Route exact path="/home" component={HomeContainer} />
           <Route exact path="/login" component={LoginForm} />

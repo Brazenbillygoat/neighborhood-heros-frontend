@@ -16,6 +16,10 @@ function LoginForm() {
     return userExists ? "Log in" : "Sign up"
   }
 
+  const loginOrCreate = (e) => {
+    return userExists ? logUserIn(e) : createNewUser(e)
+  }
+
   const passwordsMatchOnSignup = () => {
     if (myPassword 
         && 
@@ -26,7 +30,38 @@ function LoginForm() {
     }
   }
 
+  const createNewUser = (e) => {
+    e.preventDefault();
+    if (myPassword && myConfirmPassword) {
+      let login = {
+        name: myUsername,
+        password: myPassword
+      }
+      
+      debugger
+      fetch('http://localhost:3000/users/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(login)
+      })
+      .then(res => res.json())
+      .then(user => {
+        console.log("created")
+        localStorage.setItem("myId", user.id)
+        localStorage.setItem("username", user.username)
+        window.location.href="/home";
+
+      })
+    } else {
+      console.log("passwords error")
+      return <p>passwords must match</p>
+    }
+  }
+
   const logUserIn = (e) => {
+    // debugger
     e.preventDefault();
     let login = {
       name: myUsername,
@@ -43,6 +78,7 @@ function LoginForm() {
     .then(res => res.json())
     .then(user => {
       localStorage.setItem("myId", user.id)
+      localStorage.setItem("username", user.username)
       window.location.href="/home";
       // return <Redirect to="/home" />
     })
@@ -88,7 +124,7 @@ function LoginForm() {
   return (
     <div>
 
-        <form onSubmit={logUserIn}>
+        <form onSubmit={loginOrCreate}>
           <h2 className="login-header">{showLoginOrSignup()}</h2>
           <label>
             <h4>Username:</h4>
@@ -101,7 +137,7 @@ function LoginForm() {
           <br/>
           {passwordConfirmation()}
           <br/>
-          <input className="btn btn-primary" type="submit" value="login" />
+          <input className="btn btn-primary" type="submit" value={showLoginOrSignup()} />
         </form>
 
     </div>
