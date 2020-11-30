@@ -3,6 +3,7 @@
 export default function (state = {}, action) {
   switch(action.type) {
     case 'SHOWTOURNAMENT':
+      // localStorage.setItem("showTournament", Json.stringify(action.payload))
       state = action.payload;
       return state;
     // case 'UPDATETOURNAMENTNAME':

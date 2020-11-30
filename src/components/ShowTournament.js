@@ -1,49 +1,103 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { showTournament } from '../actions/tournaments';
 
 
 
 const ShowTournament = () => {
 
-  const tournaments = useSelector(state => state.tournaments);
-  const tournament = useSelector(state => state.selectedTournament);
-
   const dispatch = useDispatch();
 
-  const tournamentId = parseInt(window.location.href.split("/").slice(-1).pop() - 0)
-
-
-
-  // const joinTournament = (e) => {
-  //   let participant = {
-  //     user_id: localStorage.getItem("myId"),
-  //     tournament_id: e.currentTarget.parentNode.getAttribute("myKey")
-  //   }
-  //   fetch('http://localhost:3000/competitions/associate', {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify(participant)
-  //   })
-  //   .then(res => res.json())
-  //   .then(competition => {
-  //     console.log(competition)
-  //   })
+  // const getShowTournament = () => {
+  //   dispatch(showTournament(JSON.parse(localStorage.getItem("showTournament"))))
   // }
 
+  const tournaments = useSelector(state => state.tournaments);
+  const tournament = JSON.parse(localStorage.getItem("showTournament"));
 
-  const getSelectedTournament = () => {
-    debugger
-    console.log(dispatch(showTournament(tournaments.find((tourney) => tourney.id == tournamentId))));
+  
+  const displayJoinButton = () => {
+    let userIsMember = false;
+    for (let user of tournament.users) {
+      if (user.id == localStorage.getItem("myId")) {
+        userIsMember = true;
+      }
+    }
+
+    if (userIsMember) {
+    return <Link 
+      className="tournament-button btn"
+      onClick={() => leaveTournament()} 
+      to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
+      Leave Tournament
+    </Link> 
+    } else {
+    return <Link 
+      className="tournament-button btn"
+      onClick={(e) => joinTournament(e)} 
+      to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
+      Join Tournament
+    </Link> 
+    }
+  }
+
+  const logTask = (e) => {
+    let task = {
+      task_id: e.currentTarget.parentNode.getAttribute("myKey"),
+      user_id: localStorage.getItem("myId")
+    }
+
+    fetch('http://localhost:3000/completedtasks/log', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(task)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+  }
+
+  const leaveTournament = () => {
+    let participant = {
+      user_id: localStorage.getItem("myId"),
+      tournament_id: tournament.id
+    }
+
+    fetch('http://localhost:3000/competitions/delete', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(participant)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+  }
+
+  const joinTournament = (e) => {
+    let participant = {
+      user_id: localStorage.getItem("myId"),
+      tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
+    }
+    fetch('http://localhost:3000/competitions/associate', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(participant)
+    })
+    .then(res => res.json())
+    .then(competition => {
+      console.log(competition)
+    })
   }
 
   const listUsers = () => {
     for (const currentTournament of tournaments) {
       if (tournament.id == currentTournament.id) {
         return currentTournament.users.map((user) => {
-          // debugger
-          return <p key={user.id}>{user.username}</p>
+          return <p class="showtournament-user" key={user.id}>{user.username}</p>
         })
       }
     }
@@ -53,8 +107,13 @@ const ShowTournament = () => {
     for (const currentTournament of tournaments) {
       try {
         if (tournament.id == currentTournament.id) {
-          currentTournament.tasks.map((task) => {
-            return <p key={task.id}>{task.name}</p>
+          return currentTournament.tasks.map((task) => {
+            return (
+              <div mykey={task.id} key={task.id}>
+                <p class="showtournament-task">{task.name}</p>
+                <button className="tournament-button btn" onClick={(e) => logTask(e)}>Log Task</button> 
+              </div>
+            )
           })
         }
       } catch(err) {
@@ -67,14 +126,27 @@ const ShowTournament = () => {
 
     return(
       <div>
-        {/* {getSelectedTournament()} */}
         <h1>{tournament.name}</h1>
-        <ul>
-          {listUsers()}
-        </ul>
-        <ul>
-          {listTasks()}
-        </ul>
+        <h3 class="showtournament-description">{tournament.description}</h3>
+        <div>
+          <h4>Members of this tournament:</h4>
+          <ul>
+            {listUsers()}
+          </ul>
+          {displayJoinButton()}
+        </div>
+        <div>
+          <h4>Tasks for points:</h4>
+          <ul>
+            {listTasks()}
+          </ul>
+          <Link 
+            className="tournament-button btn"
+            onClick={(e) => joinTournament(e)} 
+            to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
+            Join Tournament
+          </Link> 
+        </div>
       </div>
     )
 

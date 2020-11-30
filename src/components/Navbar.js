@@ -10,7 +10,7 @@ function Navbar() {
 
   const showLoginOrSignup = () => {
     if (localStorage.getItem("myId")) {
-      return <span onClick={() => localStorage.clear()}>Log out</span>
+      return <p class="logout-or-login" onClick={() => localStorage.clear()}>Log out</p>
     }
     return !userExists ? "Log in" : "Sign up"
   }
@@ -20,7 +20,10 @@ function Navbar() {
       return (
         <>
           <p className="navbar-list-item">
-          <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
+            <Link className="navbar-sublink" to="/home">Profile</Link>
+          </p>
+          <p className="navbar-list-item">
+            <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
           </p>
           <p className="navbar-list-item">
             <Link className="navbar-sublink" to="/users">See Users</Link>

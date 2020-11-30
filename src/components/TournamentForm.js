@@ -8,10 +8,10 @@ import { tournamentName,
 
 const TournamentForm = () => {
 
-  const newTournamentName = useSelector(state => state.tournament.name);
-  const newTournamentDescription = useSelector(state => state.tournament.description);
-  const newTournamentStartDate = useSelector(state => state.tournament.startDate);
-  const newTournamentEndDate = useSelector(state => state.tournament.endDate);
+  const newTournamentName = useSelector(state => state.newTournament.name);
+  const newTournamentDescription = useSelector(state => state.newTournament.description);
+  const newTournamentStartDate = useSelector(state => state.newTournament.startDate);
+  const newTournamentEndDate = useSelector(state => state.newTournament.endDate);
   const dispatch = useDispatch();
 
 
@@ -23,6 +23,7 @@ const TournamentForm = () => {
       startDate: newTournamentStartDate,
       endDate: newTournamentEndDate
     }
+    console.log(tournament)
     fetch('http://localhost:3000/tournaments/create', {
       method: 'POST',
       headers: {
@@ -32,6 +33,7 @@ const TournamentForm = () => {
     })
     .then(res => res.json())
     .then(data => {
+      window.location.href="/home";
       window.location.reload();
     })
   }

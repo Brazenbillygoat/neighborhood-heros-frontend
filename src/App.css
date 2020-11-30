@@ -84,6 +84,11 @@ body {
   color: red;
 }
 
+.logout-or-login {
+
+  margin-top: -17px;
+}
+
 
 /* TOURNAMENT(S) */
 
@@ -101,9 +106,17 @@ body {
 
 .tournament-button {
   background-color: rgb(187, 180, 180);
+  color: black;
   display: inline-block;
+  font-weight: 500;
   margin-left: 1rem;
   margin-right: 1rem;
   margin-bottom: 1rem;
-  color: black;
+}
+
+/* SHOW TOURNAMENT PAGE */
+
+.showtournament-description {
+  margin-left: 5rem;
+  margin-right: 5rem;
 }

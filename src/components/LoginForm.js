@@ -12,6 +12,7 @@ function LoginForm() {
   const userExists = useSelector(state => state.userExists);
   const dispatch = useDispatch();
 
+
   const showLoginOrSignup = () => {
     return userExists ? "Log in" : "Sign up"
   }
@@ -38,7 +39,6 @@ function LoginForm() {
         password: myPassword
       }
       
-      debugger
       fetch('http://localhost:3000/users/create', {
         method: 'POST',
         headers: {
@@ -48,26 +48,26 @@ function LoginForm() {
       })
       .then(res => res.json())
       .then(user => {
-        console.log("created")
         localStorage.setItem("myId", user.id)
         localStorage.setItem("username", user.username)
-        window.location.href="/home";
+        if (localStorage.getItem("myId") != "undefined") {
+          window.location.href="/home";
+        }
 
       })
     } else {
-      console.log("passwords error")
+      
       return <p>passwords must match</p>
     }
   }
-
+  
   const logUserIn = (e) => {
-    // debugger
     e.preventDefault();
     let login = {
       name: myUsername,
       password: myPassword
     }
-
+    
     fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
@@ -80,9 +80,13 @@ function LoginForm() {
       localStorage.setItem("myId", user.id)
       localStorage.setItem("username", user.username)
       window.location.href="/home";
-      // return <Redirect to="/home" />
     })
-    // .catch((err) => console.log("error: ", err))
+    .catch((err) => {
+      document.getElementById("fetching-errors").hidden = false
+      setTimeout(() => {
+        document.getElementById("fetching-errors").hidden = true
+      }, 3000);
+    })
   }
 
   const passwordConfirmation = () => {
@@ -124,6 +128,7 @@ function LoginForm() {
   return (
     <div>
 
+        <p small className="signup-password-validation" id="fetching-errors" hidden="true"><strong>Username or password is incorrect.</strong></p>
         <form onSubmit={loginOrCreate}>
           <h2 className="login-header">{showLoginOrSignup()}</h2>
           <label>
