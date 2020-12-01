@@ -120,3 +120,31 @@ body {
   margin-left: 5rem;
   margin-right: 5rem;
 }
+
+.showtournament-task-container {
+  display: inline-block;
+  width: 43%;
+}
+
+.showtournament-user-container {
+  display: inline-block;
+  width: 43%;
+}
+
+.showtournament-task {
+  display: inline-block;
+}
+
+.showtournament-user {
+  display: inline-block;
+}
+
+.showtournament-task-points {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.log-task-link {
+  display: inline-block;
+  margin-left: 1rem;
+}

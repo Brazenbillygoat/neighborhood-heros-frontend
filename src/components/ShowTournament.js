@@ -12,6 +12,7 @@ const ShowTournament = () => {
   //   dispatch(showTournament(JSON.parse(localStorage.getItem("showTournament"))))
   // }
 
+  const users = useSelector(state => state.users);
   const tournaments = useSelector(state => state.tournaments);
   const tournament = JSON.parse(localStorage.getItem("showTournament"));
 
@@ -58,6 +59,21 @@ const ShowTournament = () => {
     .then(data => console.log(data))
   }
 
+  const calculateUserPoints = (myUser, currentTournament) => {
+    
+    let total = 0;
+    users.map((user) => {
+      if (myUser.id == user.id) {
+        user.tasks.map((task) => {
+          if (task.tournament_id == currentTournament.id) {
+            total += task.points
+          }
+        })
+      }
+    })
+    return total;
+  }
+
   const leaveTournament = () => {
     let participant = {
       user_id: localStorage.getItem("myId"),
@@ -97,7 +113,13 @@ const ShowTournament = () => {
     for (const currentTournament of tournaments) {
       if (tournament.id == currentTournament.id) {
         return currentTournament.users.map((user) => {
-          return <p class="showtournament-user" key={user.id}>{user.username}</p>
+          // debugger
+          return (
+          <div>
+            <p className="showtournament-user" key={user.id}>{user.username}</p>
+            <p className="showtournament-task-points"> - {calculateUserPoints(user, currentTournament)} points</p>
+          </div>
+          )
         })
       }
     }
@@ -111,7 +133,8 @@ const ShowTournament = () => {
             return (
               <div mykey={task.id} key={task.id}>
                 <p class="showtournament-task">{task.name}</p>
-                <button className="tournament-button btn" onClick={(e) => logTask(e)}>Log Task</button> 
+                <a className="log-task-link" onClick={(e) => logTask(e)}>Log Task</a> 
+                <p className="showtournament-task-points">{task.points} points</p>
               </div>
             )
           })
@@ -128,23 +151,22 @@ const ShowTournament = () => {
       <div>
         <h1>{tournament.name}</h1>
         <h3 class="showtournament-description">{tournament.description}</h3>
-        <div>
+        <div className="showtournament-user-container">
           <h4>Members of this tournament:</h4>
           <ul>
             {listUsers()}
           </ul>
           {displayJoinButton()}
         </div>
-        <div>
+        <div className="showtournament-task-container">
           <h4>Tasks for points:</h4>
           <ul>
             {listTasks()}
           </ul>
           <Link 
             className="tournament-button btn"
-            onClick={(e) => joinTournament(e)} 
-            to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
-            Join Tournament
+            to={`/tasks/new`}>
+            Create Task
           </Link> 
         </div>
       </div>

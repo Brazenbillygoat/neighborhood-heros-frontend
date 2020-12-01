@@ -11,6 +11,7 @@ import tournament from './tournamentReducer';
 import tournaments from './tournamentsReducer';
 import selectedTournament from './tournamentReducer';
 import newTournamentReducer from './newTournamentReducer';
+import newTaskReducer from './newTaskReducer';
 
 const allReducers = combineReducers({
   isLogged: loggedReducer,
@@ -21,9 +22,11 @@ const allReducers = combineReducers({
   userExists: userExistsReducer,
   selectedUser: selectedUser,
   newTournament: newTournamentReducer,
+  newTask: newTaskReducer,
   tournament: tournament,
   tournaments: tournaments,
   selectedTournament: selectedTournament
+
 })
 
 export default allReducers;

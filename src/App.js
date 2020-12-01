@@ -10,6 +10,7 @@ import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
 import TournamentForm from './components/TournamentForm';
 import ShowTournament from './components/ShowTournament';
+import TaskForm from './components/TaskForm';
 
 import UserContainer from './containers/UserContainer';
 import HomeContainer from './containers/HomeContainer';
@@ -60,6 +61,7 @@ function App() {
           <Route exact path="/users" component={UserContainer} />
           <Route exact path="/tournaments" component={TournamentContainer} />
           <Route path="/tournament/:id" component={ShowTournament} />
+          <Route path="/tasks/new" component={TaskForm} />
         </Switch>
       {/* </BrowserRouter> */}
       

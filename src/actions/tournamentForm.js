@@ -32,4 +32,4 @@ export {
   tournamentDescription,
   tournamentStartDate,
   tournamentEndDate
-}
+};

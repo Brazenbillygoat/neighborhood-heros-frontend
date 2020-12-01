@@ -10,8 +10,7 @@ const initializer = {
 export default function(state = initializer, action) {
   switch(action.type) {
     case 'UPDATETOURNAMENTNAME':
-      state.name = action.payload;
-      return state;
+      return state.name = { ...state, name: action.payload };
     case 'UPDATETOURNAMENTDESCRIPTION':
       return state.description = { ...state, description: action.payload };
     case 'UPDATETOURNAMENTSTARTDATE':
