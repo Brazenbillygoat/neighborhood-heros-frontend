@@ -15,6 +15,14 @@ const TournamentForm = () => {
   const dispatch = useDispatch();
 
 
+  const datesChronologicallySound = () => {
+    if (newTournamentStartDate >= newTournamentEndDate) {
+      return <p className="newtournament-date-validation">End date must be after the start date.</p>
+    } else if (newTournamentEndDate >= Date()) {
+      return <p className="newtournament-date-validation">End date must be after today's date.</p>
+    }
+  }
+
   const createTournament = (e) => {
     e.preventDefault();
     let tournament = {
@@ -66,6 +74,7 @@ const TournamentForm = () => {
             onChange={(e) => dispatch(tournamentStartDate(e.target.value))}
             />
           <h4>End Date:</h4>
+          {datesChronologicallySound()}
           <input 
             className="tournament-form-input"
             type="datetime-local" 

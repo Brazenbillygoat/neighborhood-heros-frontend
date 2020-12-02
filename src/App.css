@@ -114,6 +114,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.newtournament-date-validation {
+  font-size: 1.3rem;
+  color: red;
+}
+
 /* SHOW TOURNAMENT PAGE */
 
 .showtournament-description {

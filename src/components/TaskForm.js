@@ -6,13 +6,32 @@ import { taskName, taskDescription, taskPoints } from '../actions/taskForm';
 function TaskForm() {
   const newTaskName = useSelector(state => state.newTask.name);
   const newTaskDescription = useSelector(state => state.newTask.description);
-  const newTaskPoints = useSelector(state => state.newTask.description);
+  const newTaskPoints = useSelector(state => state.newTask.points);
+  const curentTournament = useSelector(state => state.selectedTournament)
 
   const dispatch = useDispatch();
 
 
-  const createTask = () => {
+  const createTask = (e) => {
+    e.preventDefault();
+    let newTask ={
+      name: newTaskName,
+      description: newTaskDescription,
+      points: newTaskPoints,
+      tournament_id: curentTournament.id
+    }
 
+    fetch('http://localhost:3000/tasks/create', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newTask)
+    })
+    .then(res => res.json())
+    .then(task => {
+      console.log(task)
+    })
   }
   
 

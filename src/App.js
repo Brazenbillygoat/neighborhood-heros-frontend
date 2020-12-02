@@ -2,7 +2,7 @@
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from './actions';
-import { getTournaments } from './actions/tournaments';
+import { getTournaments, pastTournaments } from './actions/tournaments';
 import { Route, Switch, } from 'react-router';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import TaskForm from './components/TaskForm';
 import UserContainer from './containers/UserContainer';
 import HomeContainer from './containers/HomeContainer';
 import TournamentContainer from './containers/TournamentContainer';
+import { tournamentDescription } from './actions/tournamentForm';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
   }
   
   const loggedIn = () => {
+    // setInterval(checkForTournamentWinners(), 3000)
     if (localStorage.getItem("myId")) {
       fetch('http://localhost:3000/users')
       .then(res => res.json())
@@ -40,12 +42,27 @@ function App() {
       fetch('http://localhost:3000/tournaments')
       .then(res => res.json())
       .then(tournaments => {
-        dispatch(getTournaments(tournaments));
+        let endedTournaments = [];
+        let activeTournaments = tournaments.map((tournament) => {
+          if (tournament.endDate >= Date()) {
+            return tournament
+          } else {
+            endedTournaments.push(tournament)
+          }
+        })
+        dispatch(getTournaments(activeTournaments));
+        dispatch(pastTournaments(endedTournaments))
       })
     }
   }
 
   localStorage.setItem("token", "true")
+
+  function checkForTournamentWinners() {
+    setInterval(function(){ 
+      console.log("Winners?"); 
+    }, 120000); //checks every 2 minutes
+  }
 
 
   return (

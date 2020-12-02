@@ -15,3 +15,11 @@ export const showTournament = (tournament) => {
   }
 }
 
+export const pastTournaments = (tournaments) => {
+  // debugger
+  return {
+    type: 'PASTTOURNAMENTS',
+    payload: tournaments
+  }
+}
+

@@ -2,7 +2,8 @@
 export default function (state = [], action) {
   switch(action.type) {
     case 'GETTOURNAMENTS':
-      return action.payload;
+      state = action.payload;
+      return state;
     default:
       return state;
   }
