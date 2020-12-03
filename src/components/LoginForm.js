@@ -128,8 +128,8 @@ function LoginForm() {
   return (
     <div>
 
-        <p small className="signup-password-validation" id="fetching-errors" hidden="true"><strong>Username or password is incorrect.</strong></p>
-        <form onSubmit={loginOrCreate}>
+        <p small id="fetching-errors" hidden="true"><strong>Username or password is incorrect.</strong></p>
+        <form className="login-signup-form" onSubmit={loginOrCreate}>
           <h2 className="login-header">{showLoginOrSignup()}</h2>
           <label>
             <h4>Username:</h4>

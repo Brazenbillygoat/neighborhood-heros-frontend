@@ -3,6 +3,12 @@
 }
 
 body {
+  background: url('https://images.pexels.com/photos/67325/pexels-photo-67325.jpeg?auto=compress&cs=tinysrgb&h=650&w=940') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  text-align: center;
   margin-top: 10rem;
 }
 
@@ -68,12 +74,21 @@ body {
   text-decoration: none;
 }
 
-
 .my-nav {
   background-color: rgb(48, 47, 47);
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 3;
+}
+
+
+/* HOMECONTAINER */
+
+.home-body-div {
+  background-color: cornsilk;
+  border: solid grey;
+  opacity: .85;
 }
 
 
@@ -85,18 +100,42 @@ body {
 }
 
 .logout-or-login {
-
   margin-top: -17px;
+}
+
+.login-signup-form {
+  background-color: cornsilk;
+  border: solid black;
+  border-radius: 10px;
+  opacity: .85;
+  padding-bottom: 2rem;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 20%;
 }
 
 
 /* TOURNAMENT(S) */
 
+.new-tournament-form {
+  background-color: cornsilk;
+  border: solid black;
+  border-radius: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  opacity: .85;
+  padding-bottom: 2rem;
+}
+
 .tournament-list-item {
+  background-color: cornsilk;
   border: solid green;
+  border-radius: 10px;
+  font-weight: 600;
   margin-top: 3rem;
   margin-bottom: 3rem;
   margin-left: 30%;
+  opacity: .85;
   width: 40%;
 }
 
@@ -119,7 +158,17 @@ body {
   color: red;
 }
 
+
 /* SHOW TOURNAMENT PAGE */
+
+.showtournament-div {
+  background-color: cornsilk;
+  border: solid black;
+  border-radius: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  opacity: .85;
+}
 
 .showtournament-description {
   margin-left: 5rem;
@@ -152,4 +201,17 @@ body {
 .log-task-link {
   display: inline-block;
   margin-left: 1rem;
+}
+
+
+/* TASKS */
+
+.create-task-form {
+  background-color: cornsilk;
+  border: solid black;
+  border-radius: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  opacity: .85;
+  padding-bottom: 2rem;
 }

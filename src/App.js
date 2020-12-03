@@ -43,13 +43,27 @@ function App() {
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
-        let activeTournaments = tournaments.map((tournament) => {
-          if (tournament.endDate >= Date()) {
-            return tournament
+        let activeTournaments = [];
+
+        // debugger
+        tournaments.forEach((tournament) => {
+          let endDateArray = tournament.end_date.split(/\D+/);
+          let endDate = new Date(
+            parseInt(endDateArray[0]),
+            parseInt(endDateArray[1] - 1),
+            parseInt(endDateArray[2]),
+            parseInt(endDateArray[3]),
+            parseInt(endDateArray[4])
+          )
+          // endDate.getTime() <= Date.now()
+          if (endDate.getTime() >= Date.now()) {
+            activeTournaments.push(tournament)
+            // debugger
           } else {
             endedTournaments.push(tournament)
           }
         })
+        // debugger
         dispatch(getTournaments(activeTournaments));
         dispatch(pastTournaments(endedTournaments))
       })
@@ -77,11 +91,12 @@ function App() {
           <Route exact path="/tournament/new" component={TournamentForm} />
           <Route exact path="/users" component={UserContainer} />
           <Route exact path="/tournaments" component={TournamentContainer} />
+          <Route exact path="/tournament/home" component={TournamentContainer} />
           <Route path="/tournament/:id" component={ShowTournament} />
           <Route path="/tasks/new" component={TaskForm} />
         </Switch>
       {/* </BrowserRouter> */}
-      
+      {/* <footer>I am a footer.</footer> */}
     </div>
   );
 }

@@ -1,5 +1,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import { taskName, taskDescription, taskPoints } from '../actions/taskForm';
 
 
@@ -12,13 +14,20 @@ function TaskForm() {
   const dispatch = useDispatch();
 
 
+  const backToActiveTournaments = () => {
+    if (localStorage.getItem("taskCreated") == "true") {
+      return <Redirect to='/tournaments' />
+    }
+  }
+
   const createTask = (e) => {
     e.preventDefault();
     let newTask ={
       name: newTaskName,
       description: newTaskDescription,
       points: newTaskPoints,
-      tournament_id: curentTournament.id
+      tournament_id: JSON.parse(localStorage.getItem("showTournament")).id,
+      creator_id: JSON.parse(localStorage.getItem("myId"))
     }
 
     fetch('http://localhost:3000/tasks/create', {
@@ -30,14 +39,21 @@ function TaskForm() {
     })
     .then(res => res.json())
     .then(task => {
+      window.location.reload();
+      localStorage.setItem("taskCreated", true)
       console.log(task)
+    })
+    .catch(err => {
+      <Redirect to='/tournaments' />
+      console.log(err)
     })
   }
   
 
   return (
 
-    <div>
+    <div className="create-task-form">
+    {backToActiveTournaments()}
     <h1>Add new task to tournament</h1>
     <form onSubmit={createTask}>
       <h2 className="taskform-header">{}</h2>
@@ -69,7 +85,7 @@ function TaskForm() {
         />
       </label>
       <br/>
-      <input className="btn btn-primary" type="submit" value="Create" />
+      <input className="btn btn-primary" type="submit" value="Create" onClick={() => backToActiveTournaments()} />
     </form>
 
 

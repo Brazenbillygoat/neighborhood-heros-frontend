@@ -29,7 +29,8 @@ const TournamentForm = () => {
       name: newTournamentName,
       description: newTournamentDescription,
       startDate: newTournamentStartDate,
-      endDate: newTournamentEndDate
+      endDate: newTournamentEndDate,
+      creatorId: localStorage.getItem("myId")
     }
     console.log(tournament)
     fetch('http://localhost:3000/tournaments/create', {
@@ -41,13 +42,13 @@ const TournamentForm = () => {
     })
     .then(res => res.json())
     .then(data => {
-      window.location.href="/home";
+      window.location.href="http://localhost:3001/tournaments";
       window.location.reload();
     })
   }
 
   return (
-    <div>
+    <div className="new-tournament-form">
 
       <form onSubmit={createTournament}>
         <h2>New Tournament</h2>

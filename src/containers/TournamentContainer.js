@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 class TournamentContainer extends Component {
   
+  
 
   joinTournament = (e) => {
     let participant = {
@@ -42,6 +43,7 @@ class TournamentContainer extends Component {
   
 
   render() {
+    localStorage.setItem("taskCreated", false)
     return(
       <div className="tournaments-container">
         

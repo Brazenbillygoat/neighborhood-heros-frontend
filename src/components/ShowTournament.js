@@ -8,10 +8,6 @@ const ShowTournament = () => {
 
   const dispatch = useDispatch();
 
-  // const getShowTournament = () => {
-  //   dispatch(showTournament(JSON.parse(localStorage.getItem("showTournament"))))
-  // }
-
   const users = useSelector(state => state.users);
   const tournaments = useSelector(state => state.tournaments);
   const tournament = JSON.parse(localStorage.getItem("showTournament"));
@@ -40,6 +36,29 @@ const ShowTournament = () => {
       Join Tournament
     </Link> 
     }
+  }
+
+  const showDeleteLink = (task) => {
+    if (task.creator_id == localStorage.getItem("myId")) {
+      return <a className="log-task-link" onClick={(e) => deleteTask(e)}>delete</a>
+    }
+  }
+
+  const deleteTask = (e) => {
+    let task = {
+      task_id: e.currentTarget.parentNode.getAttribute("myKey"),
+    }
+
+    fetch('http://localhost:3000/tasks/delete', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(task)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch((err) => console.log(err))
   }
 
   const logTask = (e) => {
@@ -111,6 +130,7 @@ const ShowTournament = () => {
 
   const listUsers = () => {
     for (const currentTournament of tournaments) {
+      // debugger
       if (tournament.id == currentTournament.id) {
         return currentTournament.users.map((user) => {
           // debugger
@@ -135,6 +155,7 @@ const ShowTournament = () => {
                 <p class="showtournament-task">{task.name}</p>
                 <a className="log-task-link" onClick={(e) => logTask(e)}>Log Task</a> 
                 <p className="showtournament-task-points">{task.points} points</p>
+                {showDeleteLink(task)} 
               </div>
             )
           })
@@ -148,7 +169,7 @@ const ShowTournament = () => {
   
 
     return(
-      <div>
+      <div className="showtournament-div">
         <h1>{tournament.name}</h1>
         <h3 class="showtournament-description">{tournament.description}</h3>
         <div className="showtournament-user-container">
