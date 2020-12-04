@@ -9,14 +9,14 @@ function TaskForm() {
   const newTaskName = useSelector(state => state.newTask.name);
   const newTaskDescription = useSelector(state => state.newTask.description);
   const newTaskPoints = useSelector(state => state.newTask.points);
-  const curentTournament = useSelector(state => state.selectedTournament)
+  const currentTournament = useSelector(state => state.selectedTournament)
 
   const dispatch = useDispatch();
 
 
   const backToActiveTournaments = () => {
     if (localStorage.getItem("taskCreated") == "true") {
-      return <Redirect to='/tournaments' />
+      return <Redirect to={`/tournament/${currentTournament.id}`} />
     }
   }
 
@@ -68,8 +68,8 @@ function TaskForm() {
       <br/>
       <label>
         <h4>Task Description:</h4>
-        <input className="login-input"
-                type="text" 
+        <textarea className="login-input"
+                type="textarea" 
                 value={newTaskDescription}
                 onChange={(e) => dispatch(taskDescription(e.target.value))} 
         />

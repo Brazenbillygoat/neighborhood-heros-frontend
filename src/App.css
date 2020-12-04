@@ -91,6 +91,14 @@ body {
   opacity: .85;
 }
 
+.home-paragraph {
+  letter-spacing: .1rem;
+}
+
+.winner-paragraph {
+  font-weight: bold;
+}
+
 
 /* LOGIN/SIGNUP FORM */
 
@@ -161,6 +169,10 @@ body {
 
 /* SHOW TOURNAMENT PAGE */
 
+/* .showtournament-ul {
+  border: solid black;
+} */
+
 .showtournament-div {
   background-color: cornsilk;
   border: solid black;
@@ -177,11 +189,16 @@ body {
 
 .showtournament-task-container {
   display: inline-block;
+  float: left;
+  position: relative;
+  top: 0;
   width: 43%;
 }
 
 .showtournament-user-container {
   display: inline-block;
+  position: relative;
+  top: 0;
   width: 43%;
 }
 
@@ -201,6 +218,7 @@ body {
 .log-task-link {
   display: inline-block;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 

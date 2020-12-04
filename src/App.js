@@ -3,6 +3,7 @@ import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUsers } from './actions';
 import { getTournaments, pastTournaments } from './actions/tournaments';
+// import { addWinners } from './actions/winners';
 import { Route, Switch, } from 'react-router';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ import { tournamentDescription } from './actions/tournamentForm';
 
 function App() {
   const isLogged = useSelector(state => state.isLogged);
+  const winners = useSelector(state => state.winners);
   const dispatch = useDispatch();
 
   const logInOrHome = () => {
@@ -45,7 +47,6 @@ function App() {
         let endedTournaments = [];
         let activeTournaments = [];
 
-        // debugger
         tournaments.forEach((tournament) => {
           let endDateArray = tournament.end_date.split(/\D+/);
           let endDate = new Date(
@@ -55,22 +56,21 @@ function App() {
             parseInt(endDateArray[3]),
             parseInt(endDateArray[4])
           )
-          // endDate.getTime() <= Date.now()
           if (endDate.getTime() >= Date.now()) {
             activeTournaments.push(tournament)
-            // debugger
           } else {
             endedTournaments.push(tournament)
           }
         })
-        // debugger
+        // dispatch(addWinners(endedTournaments));
         dispatch(getTournaments(activeTournaments));
-        dispatch(pastTournaments(endedTournaments))
+        dispatch(pastTournaments(endedTournaments));
       })
     }
   }
 
-  localStorage.setItem("token", "true")
+  localStorage.setItem("token", "true");
+  localStorage.setItem("isAMember", false);
 
   function checkForTournamentWinners() {
     setInterval(function(){ 

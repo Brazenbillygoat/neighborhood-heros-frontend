@@ -2,10 +2,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { signupOrLogin } from '../actions/loginForm';
 import { Link } from 'react-router-dom';
+import { tournamentMembers } from '../actions/tournamentMembers';
 
 
 function Navbar() {
-  const userExists = useSelector(state => state.userExists)
+  const userExists = useSelector(state => state.userExists);
+  const users = useSelector(state => state.users);
   const dispatch = useDispatch();
 
   const showLoginOrSignup = () => {
@@ -13,6 +15,16 @@ function Navbar() {
       return <p class="logout-or-login" onClick={() => localStorage.clear()}>Log out</p>
     }
     return !userExists ? "Log in" : "Sign up"
+  }
+
+  const userMembers = () => {
+    let participants = [];
+    for (let user of users) {
+      if (user.id != localStorage.getItem("myId")) {
+        participants.push(user)
+      }
+    }
+    return participants;
   }
 
   const isLoggedIn = () => {
@@ -29,7 +41,7 @@ function Navbar() {
             <Link className="navbar-sublink" to="/users">See Users</Link>
           </p>  
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
+            <Link className="navbar-sublink" onClick={() => dispatch(tournamentMembers(userMembers()))} to="/tournaments">Active Tournaments</Link>
           </p> 
         </>
       )
@@ -39,7 +51,7 @@ function Navbar() {
   return (
 
   <nav className="navbar navbar-expand-md my-nav">
-    <Link className="home-link-navbar" to="/home">Neighborhood<br/>Heros</Link>
+    <Link className="home-link-navbar" to="/home">Neighborhood<br/>Heroes</Link>
     <p>
       <Link to="/login" 
             className="login-signup-toggle"
