@@ -28,7 +28,7 @@ class UserContainer extends Component {
   createUserList() {
     return this.props.users.map((user) => {
       return(
-        <div key={user.id} myKey={user.id}>
+        <div className="users-container" key={user.id} myKey={user.id}>
         <p onClick={() => this.props.showUser(user)}>{user.username}</p>
         <button onClick={(e) => this.beFriend(e)}>Add Friend</button>
         </div>

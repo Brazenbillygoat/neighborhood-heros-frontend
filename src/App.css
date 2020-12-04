@@ -233,3 +233,20 @@ body {
   opacity: .85;
   padding-bottom: 2rem;
 }
+
+
+/* USERS */
+
+.users-container {
+  background-color: cornsilk;
+  border: solid green;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  margin-left: 30%;
+  opacity: .85;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  width: 40%;
+}
