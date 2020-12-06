@@ -32,7 +32,8 @@ function Navbar() {
       return (
         <>
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" to="/home">Profile</Link>
+          {/* adjust below route to take an id number */}
+            <Link className="navbar-sublink" to="/profile/:id">Profile</Link> 
           </p>
           <p className="navbar-list-item">
             <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
