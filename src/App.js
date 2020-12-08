@@ -90,7 +90,6 @@ function App() {
           <Route path="/tournament/:id" component={ShowTournament} />
           <Route path="/tasks/new" component={TaskForm} />
         </Switch>
-      {/* <footer>I am a footer.</footer> */}
     </div>
   );
 }

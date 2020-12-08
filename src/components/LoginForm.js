@@ -48,7 +48,7 @@ function LoginForm() {
       })
       .then(res => res.json())
       .then(user => {
-        localStorage.setItem("myId", user.id)
+        localStorage.setItem("myId", JSON.stringify(user))
         localStorage.setItem("username", user.username)
         if (localStorage.getItem("myId") != "undefined") {
           window.location.href="/home";
@@ -77,8 +77,7 @@ function LoginForm() {
     })
     .then(res => res.json())
     .then(user => {
-      localStorage.setItem("myId", user.id)
-      localStorage.setItem("username", user.username)
+      localStorage.setItem("myId", JSON.stringify(user))
       window.location.href="/home";
     })
     .catch((err) => {
