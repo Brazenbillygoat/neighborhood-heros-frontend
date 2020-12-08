@@ -24,6 +24,8 @@ function App() {
   const winners = useSelector(state => state.winners);
   const dispatch = useDispatch();
 
+  //this is a helper method for deciding to send the client to the login page or to  the home page
+  //depending on whether the client is logged in as a user
   const logInOrHome = () => {
     if (localStorage.getItem("myId")) {
       return <Redirect to='home' />
@@ -32,8 +34,9 @@ function App() {
     }
   }
   
+  //this checks is if a client is logged in as a user and if they are
+  //loads users and tournaments into state
   const loggedIn = () => {
-    // setInterval(checkForTournamentWinners(), 3000)
     if (localStorage.getItem("myId")) {
       fetch('http://localhost:3000/users')
       .then(res => res.json())
@@ -46,7 +49,7 @@ function App() {
       .then(tournaments => {
         let endedTournaments = [];
         let activeTournaments = [];
-
+        //dividing tournaments into active or past depending on enddate
         tournaments.forEach((tournament) => {
           let endDateArray = tournament.end_date.split(/\D+/);
           let endDate = new Date(
@@ -62,7 +65,6 @@ function App() {
             endedTournaments.push(tournament)
           }
         })
-        // dispatch(addWinners(endedTournaments));
         dispatch(getTournaments(activeTournaments));
         dispatch(pastTournaments(endedTournaments));
       })
@@ -72,18 +74,11 @@ function App() {
   localStorage.setItem("token", "true");
   localStorage.setItem("isAMember", false);
 
-  function checkForTournamentWinners() {
-    setInterval(function(){ 
-      console.log("Winners?"); 
-    }, 120000); //checks every 2 minutes
-  }
-
 
   return (
     <div className="App">
       <Navbar />
       {loggedIn()}
-      {/* <BrowserRouter> */}
       {logInOrHome()}
         <Switch>
           <Route exact path="/home" component={HomeContainer} />
@@ -95,7 +90,6 @@ function App() {
           <Route path="/tournament/:id" component={ShowTournament} />
           <Route path="/tasks/new" component={TaskForm} />
         </Switch>
-      {/* </BrowserRouter> */}
       {/* <footer>I am a footer.</footer> */}
     </div>
   );
