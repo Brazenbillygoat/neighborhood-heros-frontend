@@ -12,7 +12,7 @@ class TournamentContainer extends Component {
 
   joinTournament = (e) => {
     let participant = {
-      user_id: localStorage.getItem("myId"),
+      user_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: e.currentTarget.parentNode.getAttribute("myKey")
     }
     fetch('http://localhost:3000/competitions/associate', {
