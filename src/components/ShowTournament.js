@@ -184,14 +184,18 @@ const ShowTournament = () => {
 
   const listUsers = () => {
   
-      return myTournamentMembers.map((member) => {
-        return (
-          <div className="showtournament-ul">
-            <p className="showtournament-user" key={member.id}>{member.username}</p>
-            {pointsDecider(member)}
-            {/* <p className="showtournament-task-points"> - {calculateUserPoints(member, selectedTournament)} points</p> */}
-          </div>
-        )
+      return tournaments.map((tournament) => {
+        if (tournament.id == selectedTournament.id) {
+          return tournament.users.map((user) => {
+            return (
+              <div className="showtournament-ul">
+                <p className="showtournament-user" key={user.id}>{user.username}</p>
+                {pointsDecider(user)}
+                {/* <p className="showtournament-task-points"> - {calculateUserPoints(member, selectedTournament)} points</p> */}
+              </div>
+            )
+          })
+        }
       })
   }
 
