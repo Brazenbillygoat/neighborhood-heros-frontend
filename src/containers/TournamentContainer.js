@@ -23,8 +23,13 @@ class TournamentContainer extends Component {
       body: JSON.stringify(participant)
     })
     .then(res => res.json())
-    .then(competition => {
-      console.log(competition)
+    .then(data => {
+      if(data.error == 1) {
+        document.getElementsByClassName("tournament-list-error")[0].removeAttribute("hidden");
+        setTimeout(() => {
+          document.getElementsByClassName("tournament-list-error")[0].setAttribute("hidden", "true");
+        }, 3000);
+      }
     })
   }
 
@@ -41,11 +46,12 @@ class TournamentContainer extends Component {
     })
   }
   
-
+  
   render() {
     localStorage.setItem("taskCreated", false)
     return(
       <div className="tournaments-container">
+      <p className="tournament-list-error" hidden>You've already joined this tournament.</p>
         
         {this.createTournamentList()}
 
