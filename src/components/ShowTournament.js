@@ -26,11 +26,7 @@ const ShowTournament = () => {
       participants.push(user)
     }
 
-    // for (let user of users) {
-    //   if (user.id != localStorage.getItem("myId")) {
-    //     participants.push(user)
-    //   }
-    // }
+    
     return participants;
   }
   
@@ -178,17 +174,14 @@ const ShowTournament = () => {
   }
 
   const listUsers = () => {
-    return tournaments.map((tournament) => {
-      if (tournament.id == selectedTournament.id) {
-        return tournament.users.map((user) => {
-          return (
-            <div className="showtournament-ul">
-              <p className="showtournament-user" key={user.id}>{user.username}</p>
-              <p className="showtournament-task-points">- {calculateUserPoints(user, selectedTournament)} points</p>
-            </div>
-          )
-        })
-      }
+
+    return userMembers().map((user) => {
+      return (
+        <div className="showtournament-ul">
+          <p className="showtournament-user" key={user.id}>{user.username}</p>
+          <p className="showtournament-task-points">- {calculateUserPoints(user, selectedTournament)} points</p>
+        </div>
+      )
     })
   }
 
