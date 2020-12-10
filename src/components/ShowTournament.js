@@ -114,17 +114,24 @@ const ShowTournament = () => {
     })
   }
 
-  const calculateUserPoints = (myUser, currentTournament) => {
+  const calculateUserPoints = (thisUser, currentTournament) => {
     
     let total = 0;
     users.map((user) => {
-      if (myUser.id == user.id) {
-        user.tasks.map((task) => {
-          if (task.tournament_id == currentTournament.id) {
-            total += task.points
-          }
-        })
-      }
+      user.tasks.map((task) => {
+        if (task.tournament_id == currentTournament.id) {
+          total += task.points
+        }
+      })
+
+
+      // if (thisUser.id == user.id) {
+      //   user.tasks.map((task) => {
+      //     if (task.tournament_id == currentTournament.id) {
+      //       total += task.points
+      //     }
+      //   })
+      // }
     })
     return total;
   }
@@ -177,7 +184,7 @@ const ShowTournament = () => {
 
   const pointsDecider = (member) => {
     if (member.id == localStorage.getItem("myId")) {
-      return <p className="showtournament-task-points"> - {myPoints} points</p>
+      return <p className="showtournament-task-points">- {myPoints} points</p>
     }
     return <p className="showtournament-task-points"> - {calculateUserPoints(member, selectedTournament)} points</p>
   }
@@ -190,8 +197,7 @@ const ShowTournament = () => {
             return (
               <div className="showtournament-ul">
                 <p className="showtournament-user" key={user.id}>{user.username}</p>
-                {pointsDecider(user)}
-                {/* <p className="showtournament-task-points"> - {calculateUserPoints(member, selectedTournament)} points</p> */}
+                <p className="showtournament-task-points">- {calculateUserPoints(user, selectedTournament)} points</p>
               </div>
             )
           })
