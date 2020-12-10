@@ -21,11 +21,16 @@ const ShowTournament = () => {
   
   const userMembers = () => {
     let participants = [];
-    for (let user of users) {
-      if (user.id != localStorage.getItem("myId")) {
-        participants.push(user)
-      }
+
+    for (let user of selectedTournament.users) {
+      participants.push(user)
     }
+
+    // for (let user of users) {
+    //   if (user.id != localStorage.getItem("myId")) {
+    //     participants.push(user)
+    //   }
+    // }
     return participants;
   }
   
@@ -165,19 +170,11 @@ const ShowTournament = () => {
     })
     .then(res => res.json())
     .then(competition => {
-      for (let user of users) {
-        if (user.id == localStorage.getItem("myId")) {
-          dispatch(tournamentMembers([...userMembers(), user]))
-        }
-      }
+          dispatch(
+            tournamentMembers([...userMembers(),
+            JSON.parse(localStorage.getItem("myId"))])
+          )
     })
-  }
-
-  const pointsDecider = (member) => {
-    if (member.id == localStorage.getItem("myId")) {
-      return <p className="showtournament-task-points">- {myPoints} points</p>
-    }
-    return <p className="showtournament-task-points"> - {calculateUserPoints(member, selectedTournament)} points</p>
   }
 
   const listUsers = () => {
@@ -217,7 +214,6 @@ const ShowTournament = () => {
     }
   }
   
-    // debugger
     return(
       <div className="showtournament-div">
         <h1>{tournament.name}</h1>
