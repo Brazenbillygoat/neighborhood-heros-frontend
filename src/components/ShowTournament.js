@@ -31,20 +31,8 @@ const ShowTournament = () => {
   }
   
   const displayJoinButton = () => {
-    let userIds = [];
-    
-    for (let user of myTournamentMembers) {
-      userIds.push(user.id)
-    }
 
-      let leaveOrJoin = 1;
-      if (userIds.includes(JSON.parse(localStorage.getItem("myId")))) {
-        leaveOrJoin =  1;
-      } else {
-        leaveOrJoin = 0;
-      }
-
-    if (leaveOrJoin) {
+    if (myTournamentMembers.includes(JSON.parse(localStorage.getItem("myId")))) {
       return <Link 
           className="tournament-button btn"
           onClick={(e) => leaveTournament(e)} 
@@ -166,6 +154,7 @@ const ShowTournament = () => {
     })
     .then(res => res.json())
     .then(competition => {
+      console.log(competition)
           dispatch(
             tournamentMembers([...userMembers(),
             JSON.parse(localStorage.getItem("myId"))])
