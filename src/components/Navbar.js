@@ -2,13 +2,51 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { signupOrLogin } from '../actions/loginForm';
 import { Link } from 'react-router-dom';
-import { tournamentMembers } from '../actions/tournamentMembers';
+import { getUsers } from '../actions';
+import { getTournaments, pastTournaments } from '../actions/tournaments';
+// import { tournamentMembers } from '../actions/tournamentMembers';
 
 
 function Navbar() {
   const userExists = useSelector(state => state.userExists);
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
+
+
+  const fetchUsersAndTournaments = () => {
+    if (localStorage.getItem("myId")) {
+      fetch('http://localhost:3000/users')
+      .then(res => res.json())
+      .then(users => {
+        dispatch(getUsers(users));
+      })
+
+      fetch('http://localhost:3000/tournaments')
+      .then(res => res.json())
+      .then(tournaments => {
+        let endedTournaments = [];
+        let activeTournaments = [];
+        //dividing tournaments into active or past depending on enddate
+        tournaments.forEach((tournament) => {
+          let endDateArray = tournament.end_date.split(/\D+/);
+          let endDate = new Date(
+            parseInt(endDateArray[0]),
+            parseInt(endDateArray[1] - 1),
+            parseInt(endDateArray[2]),
+            parseInt(endDateArray[3]),
+            parseInt(endDateArray[4])
+          )
+          if (endDate.getTime() >= Date.now()) {
+            activeTournaments.push(tournament)
+          } else {
+            // endedTournaments.push(tournament)
+          }
+        })
+        dispatch(getTournaments(activeTournaments));
+        dispatch(pastTournaments(endedTournaments));
+      })
+    }
+  }
 
   const showLoginOrSignup = () => {
     if (localStorage.getItem("myId")) {
@@ -32,7 +70,7 @@ function Navbar() {
             <Link className="navbar-sublink" to="/users">See Users</Link>
           </p>  
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
+            <Link className="navbar-sublink" onClick={() => fetchUsersAndTournaments()} to="/tournaments">Active Tournaments</Link>
           </p> 
         </>
       )

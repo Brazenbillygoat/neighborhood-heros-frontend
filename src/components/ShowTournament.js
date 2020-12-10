@@ -25,7 +25,7 @@ const ShowTournament = () => {
     for (let user of selectedTournament.users) {
       participants.push(user)
     }
-
+    
     if (myTournamentMembers.length == 0) {
       dispatch(tournamentMembers(participants))
     }
@@ -127,7 +127,7 @@ const ShowTournament = () => {
   const leaveTournament = () => {
     
     let participant = {
-      user_id: localStorage.getItem("myId"),
+      user_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: tournament.id
     }
 
@@ -144,7 +144,7 @@ const ShowTournament = () => {
       console.log(err)
     })
 
-    dispatch(tournamentMembers(userMembers().filter((user) => user.id != localStorage.getItem("myId"))))
+    dispatch(tournamentMembers(userMembers().filter((user) => user.id != JSON.parse(localStorage.getItem("myId")).id)))
 
   }
 
