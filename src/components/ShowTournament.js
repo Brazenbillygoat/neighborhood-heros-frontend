@@ -25,7 +25,7 @@ const ShowTournament = () => {
     for (let user of selectedTournament.users) {
       participants.push(user)
     }
-    
+    debugger
     if (myTournamentMembers.length == 0) {
       dispatch(tournamentMembers(participants))
     }

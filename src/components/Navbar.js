@@ -13,15 +13,18 @@ function Navbar() {
   const dispatch = useDispatch();
 
 
-  const fetchUsersAndTournaments = () => {
+  const fetchUsers = () => {
     if (localStorage.getItem("myId")) {
       fetch('http://localhost:3000/users')
       .then(res => res.json())
       .then(users => {
         dispatch(getUsers(users));
       })
+    }
+  }
 
-      fetch('http://localhost:3000/tournaments')
+  const fetchTournaments = () => {
+    fetch('http://localhost:3000/tournaments')
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
@@ -45,7 +48,6 @@ function Navbar() {
         dispatch(getTournaments(activeTournaments));
         dispatch(pastTournaments(endedTournaments));
       })
-    }
   }
 
   const showLoginOrSignup = () => {
@@ -70,7 +72,7 @@ function Navbar() {
             <Link className="navbar-sublink" to="/users">See Users</Link>
           </p>  
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" onClick={() => fetchUsersAndTournaments()} to="/tournaments">Active Tournaments</Link>
+            <Link className="navbar-sublink" onClick={() => fetchTournaments()} to="/tournaments">Active Tournaments</Link>
           </p> 
         </>
       )
