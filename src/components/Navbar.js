@@ -17,16 +17,6 @@ function Navbar() {
     return !userExists ? "Log in" : "Sign up"
   }
 
-  const userMembers = () => {
-    let participants = [];
-    for (let user of users) {
-      if (user.id != localStorage.getItem("myId")) {
-        participants.push(user)
-      }
-    }
-    return participants;
-  }
-
   const isLoggedIn = () => {
     if (localStorage.getItem("myId")) {
       return (
@@ -42,7 +32,7 @@ function Navbar() {
             <Link className="navbar-sublink" to="/users">See Users</Link>
           </p>  
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" onClick={() => dispatch(tournamentMembers(userMembers()))} to="/tournaments">Active Tournaments</Link>
+            <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
           </p> 
         </>
       )

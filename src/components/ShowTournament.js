@@ -26,13 +26,21 @@ const ShowTournament = () => {
       participants.push(user)
     }
 
-    
+    if (myTournamentMembers.length == 0) {
+      dispatch(tournamentMembers(participants))
+    }
+
     return participants;
   }
   
   const displayJoinButton = () => {
+    let memberIds = []
 
-    if (myTournamentMembers.includes(JSON.parse(localStorage.getItem("myId")))) {
+    for (let member of myTournamentMembers) {
+      memberIds.push(member.id)
+    }
+
+    if (memberIds.includes(JSON.parse(localStorage.getItem("myId")).id)) {
       return <Link 
           className="tournament-button btn"
           onClick={(e) => leaveTournament(e)} 
