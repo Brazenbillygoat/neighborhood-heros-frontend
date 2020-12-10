@@ -123,15 +123,6 @@ const ShowTournament = () => {
           total += task.points
         }
       })
-
-
-      // if (thisUser.id == user.id) {
-      //   user.tasks.map((task) => {
-      //     if (task.tournament_id == currentTournament.id) {
-      //       total += task.points
-      //     }
-      //   })
-      // }
     })
     return total;
   }
@@ -162,7 +153,7 @@ const ShowTournament = () => {
 
   const joinTournament = (e) => {
     let participant = {
-      user_id: localStorage.getItem("myId"),
+      user_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
     fetch('http://localhost:3000/competitions/associate', {
@@ -190,19 +181,18 @@ const ShowTournament = () => {
   }
 
   const listUsers = () => {
-  
-      return tournaments.map((tournament) => {
-        if (tournament.id == selectedTournament.id) {
-          return tournament.users.map((user) => {
-            return (
-              <div className="showtournament-ul">
-                <p className="showtournament-user" key={user.id}>{user.username}</p>
-                <p className="showtournament-task-points">- {calculateUserPoints(user, selectedTournament)} points</p>
-              </div>
-            )
-          })
-        }
-      })
+    return tournaments.map((tournament) => {
+      if (tournament.id == selectedTournament.id) {
+        return tournament.users.map((user) => {
+          return (
+            <div className="showtournament-ul">
+              <p className="showtournament-user" key={user.id}>{user.username}</p>
+              <p className="showtournament-task-points">- {calculateUserPoints(user, selectedTournament)} points</p>
+            </div>
+          )
+        })
+      }
+    })
   }
 
   const listTasks = () => {
