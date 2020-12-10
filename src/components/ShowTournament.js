@@ -25,8 +25,9 @@ const ShowTournament = () => {
     for (let user of selectedTournament.users) {
       participants.push(user)
     }
-    debugger
-    if (myTournamentMembers.length == 0) {
+    
+    if (myTournamentMembers.length == 0 && selectedTournament.users.length != 0) {
+      // debugger
       dispatch(tournamentMembers(participants))
     }
 
@@ -139,6 +140,13 @@ const ShowTournament = () => {
       body: JSON.stringify(participant)
     })
     .then(() => {
+      let indexToDelete 
+      selectedTournament.users.forEach((user, i) => {
+        if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
+          indexToDelete = i
+        }
+      })
+      selectedTournament.users.splice(indexToDelete, 1)
     })
     .catch((err) => {
       console.log(err)
@@ -162,7 +170,8 @@ const ShowTournament = () => {
     })
     .then(res => res.json())
     .then(competition => {
-      console.log(competition)
+      selectedTournament.users.push(JSON.parse(localStorage.getItem("myId")))
+      debugger
           dispatch(
             tournamentMembers([...userMembers(),
             JSON.parse(localStorage.getItem("myId"))])
