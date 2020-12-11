@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { proxyUpdate } from '../actions/proxy';
 import { showTournament } from '../actions/tournaments';
-import { tournamentMembers } from '../actions/tournamentMembers';
 import { addPoints } from '../actions/myPoints';
 import { useEffect } from 'react';
 
@@ -16,7 +15,6 @@ const ShowTournament = () => {
   const tournaments = useSelector(state => state.tournaments);
   const selectedTournament = useSelector(state => state.selectedTournament);
   const tournament = JSON.parse(localStorage.getItem("showTournament"));
-  const myTournamentMembers = useSelector(state => state.myTournamentMembers);
   const myPoints = useSelector(state => state.myPoints);
   
   

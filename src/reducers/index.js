@@ -14,7 +14,6 @@ import newTournamentReducer from './newTournamentReducer';
 import newTaskReducer from './newTaskReducer';
 import pastTournaments from './pastTournamentsReducer';
 import proxyUpdate from './proxyReducer';
-import tournamentMembers from './tournamentMemberReducer';
 import myPoints from './myPointsReducer';
 import winners from './winnersReducer';
 
@@ -33,7 +32,6 @@ const allReducers = combineReducers({
   selectedTournament: selectedTournament,
   pastTournaments: pastTournaments,
   proxy: proxyUpdate,
-  myTournamentMembers: tournamentMembers,
   myPoints: myPoints,
   winners: winners
 })
