@@ -20,30 +20,18 @@ const ShowTournament = () => {
   const myPoints = useSelector(state => state.myPoints);
   
   
-  // const userMembers = () => {
-  //   let participants = [];
-
-  //   for (let user of selectedTournament.users) {
-  //     participants.push(user)
-  //   }
-    
-  //   if (myTournamentMembers.length == 0 && selectedTournament.users.length != 0) {
-  //     // debugger
-  //     dispatch(tournamentMembers(participants))
-  //   }
-
-  //   return participants;
-  // }
-  
-  const displayJoinButton = () => {
+  const checkUserIsMember = () => {
     let memberIds = []
-
     for (let member of selectedTournament.users) {
       memberIds.push(member.id)
     }
-    debugger
 
-    if (memberIds.includes(JSON.parse(localStorage.getItem("myId")).id)) {
+    return memberIds.includes(JSON.parse(localStorage.getItem("myId")).id)
+  }
+  
+  const displayJoinButton = () => {
+
+    if (checkUserIsMember()) {
       return <Link 
           className="tournament-button btn"
           onClick={leaveTournament} 
@@ -134,6 +122,18 @@ const ShowTournament = () => {
       tournament_id: tournament.id
     }
 
+    if (checkUserIsMember()) {
+      let indexToDelete;
+
+      selectedTournament.users.forEach((user, i) => {
+        if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
+          indexToDelete = i
+        }
+      })
+      
+      selectedTournament.users.splice(indexToDelete, 1)
+    }
+
     fetch('http://localhost:3000/competitions/delete', {
       method: 'POST',
       headers: {
@@ -142,14 +142,6 @@ const ShowTournament = () => {
       body: JSON.stringify(participant)
     })
     .then(() => {
-      let indexToDelete;
-      selectedTournament.users.forEach((user, i) => {
-        if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
-          indexToDelete = i
-        }
-      })
-      
-      selectedTournament.users.splice(indexToDelete, 1)
       dispatch(showTournament(selectedTournament))
     })
     .catch((err) => {
@@ -165,7 +157,11 @@ const ShowTournament = () => {
       user_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
-    debugger
+
+    if (!checkUserIsMember()) {
+      selectedTournament.users.push(JSON.parse(localStorage.getItem("myId")))
+    }
+    
     fetch('http://localhost:3000/competitions/associate', {
       method: 'POST',
       headers: {
@@ -175,18 +171,11 @@ const ShowTournament = () => {
     })
     .then(res => res.json())
     .then(competition => {
-      // debugger
-      // dispatch(
-      //   tournamentMembers([...userMembers(),
-      //   JSON.parse(localStorage.getItem("myId"))])
-      // )
-      selectedTournament.users.push(JSON.parse(localStorage.getItem("myId")))
       dispatch(showTournament(selectedTournament))
     })
   }
 
   const listUsers = () => {
-    debugger
     return selectedTournament.users.map((user) => {
       return (
         <div className="showtournament-ul">
@@ -226,7 +215,7 @@ const ShowTournament = () => {
         <div className="showtournament-user-container">
           <h4>Members of this tournament:</h4>
           <ul>
-            {listUsers}
+            {listUsers()}
           </ul>
           {displayJoinButton()}
         </div>
