@@ -185,25 +185,21 @@ const ShowTournament = () => {
   }
 
   const listTasks = () => {
-    for (const currentTournament of tournaments) {
       try {
-        if (tournament.id == currentTournament.id) {
-          return currentTournament.tasks.map((task) => {
-            return (
-              <div  className="showtournament-ul" mykey={task.id} key={task.id}>
-                <p class="showtournament-task">{task.name}</p>
-                <a className="log-task-link" onClick={(e) => logTask(e)}>Log Task</a> 
-                <p className="showtournament-task-points">{task.points} points</p>
-                {showDeleteLink(task)} 
-              </div>
-            )
-          })
-        }
+        return selectedTournament.tasks.map((task) => {
+          return (
+            <div  className="showtournament-ul" mykey={task.id} key={task.id}>
+              <p class="showtournament-task">{task.name}</p>
+              <a className="log-task-link" onClick={(e) => logTask(e)}>Log Task</a> 
+              <p className="showtournament-task-points">{task.points} points</p>
+              {showDeleteLink(task)} 
+            </div>
+          )
+        })
       } catch(err) {
         console.log(err)
         return <p>There are no tasks yet created for this tournament.</p>
       }
-    }
   }
   
     return(
