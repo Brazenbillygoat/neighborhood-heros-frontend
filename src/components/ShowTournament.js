@@ -4,6 +4,7 @@ import { proxyUpdate } from '../actions/proxy';
 import { showTournament } from '../actions/tournaments';
 import { tournamentMembers } from '../actions/tournamentMembers';
 import { addPoints } from '../actions/myPoints';
+import { useEffect } from 'react';
 
 
 
@@ -19,39 +20,40 @@ const ShowTournament = () => {
   const myPoints = useSelector(state => state.myPoints);
   
   
-  const userMembers = () => {
-    let participants = [];
+  // const userMembers = () => {
+  //   let participants = [];
 
-    for (let user of selectedTournament.users) {
-      participants.push(user)
-    }
+  //   for (let user of selectedTournament.users) {
+  //     participants.push(user)
+  //   }
     
-    if (myTournamentMembers.length == 0 && selectedTournament.users.length != 0) {
-      // debugger
-      dispatch(tournamentMembers(participants))
-    }
+  //   if (myTournamentMembers.length == 0 && selectedTournament.users.length != 0) {
+  //     // debugger
+  //     dispatch(tournamentMembers(participants))
+  //   }
 
-    return participants;
-  }
+  //   return participants;
+  // }
   
   const displayJoinButton = () => {
     let memberIds = []
 
-    for (let member of myTournamentMembers) {
+    for (let member of selectedTournament.users) {
       memberIds.push(member.id)
     }
+    debugger
 
     if (memberIds.includes(JSON.parse(localStorage.getItem("myId")).id)) {
       return <Link 
           className="tournament-button btn"
-          onClick={(e) => leaveTournament(e)} 
+          onClick={leaveTournament} 
           to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
           Leave Tournament
         </Link> 
     }
     return <Link 
           className="tournament-button btn"
-          onClick={(e) => joinTournament(e)} 
+          onClick={joinTournament} 
           to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
           Join Tournament
         </Link> 
@@ -148,20 +150,22 @@ const ShowTournament = () => {
       })
       
       selectedTournament.users.splice(indexToDelete, 1)
+      dispatch(showTournament(selectedTournament))
     })
     .catch((err) => {
       console.log(err)
     })
 
-    dispatch(tournamentMembers(userMembers().filter((user) => user.id != JSON.parse(localStorage.getItem("myId")).id)))
+    // dispatch(tournamentMembers(userMembers().filter((user) => user.id != JSON.parse(localStorage.getItem("myId")).id)))
 
   }
 
-  const joinTournament = (e) => {
+  const joinTournament = () => {
     let participant = {
       user_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
+    debugger
     fetch('http://localhost:3000/competitions/associate', {
       method: 'POST',
       headers: {
@@ -172,17 +176,18 @@ const ShowTournament = () => {
     .then(res => res.json())
     .then(competition => {
       // debugger
-      dispatch(
-        tournamentMembers([...userMembers(),
-        JSON.parse(localStorage.getItem("myId"))])
-      )
+      // dispatch(
+      //   tournamentMembers([...userMembers(),
+      //   JSON.parse(localStorage.getItem("myId"))])
+      // )
       selectedTournament.users.push(JSON.parse(localStorage.getItem("myId")))
+      dispatch(showTournament(selectedTournament))
     })
   }
 
   const listUsers = () => {
-
-    return userMembers().map((user) => {
+    debugger
+    return selectedTournament.users.map((user) => {
       return (
         <div className="showtournament-ul">
           <p className="showtournament-user" key={user.id}>{user.username}</p>
@@ -221,7 +226,7 @@ const ShowTournament = () => {
         <div className="showtournament-user-container">
           <h4>Members of this tournament:</h4>
           <ul>
-            {listUsers()}
+            {listUsers}
           </ul>
           {displayJoinButton()}
         </div>
