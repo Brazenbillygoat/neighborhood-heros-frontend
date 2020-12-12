@@ -81,12 +81,19 @@ const ShowTournament = () => {
   }
 
   const logTask = (e) => {
-    let taskToLog = selectedTournament
+    let taskToLog = selectedTournament.tasks.find((task) => {
+      return task.id == e.currentTarget.parentNode.getAttribute("myKey")
+    })
+    let userToAttribute = selectedTournament.users.find((user) => {
+      return user.id == JSON.parse(localStorage.getItem("myId")).id
+    })
+
     let task = {
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
-      user_id: localStorage.getItem("myId")
+      user_id: JSON.parse(localStorage.getItem("myId")).id
     }
-    JSON.parse(localStorage.getItem("myId")).tasks.push()
+    JSON.parse(localStorage.getItem("myId")).tasks.push(taskToLog)
+    userToAttribute.tasks.push(taskToLog)
 
     fetch('http://localhost:3000/completedtasks/log', {
       method: 'POST',
@@ -126,14 +133,13 @@ const ShowTournament = () => {
 
     if (checkUserIsMember()) {
       let indexToDelete;
-
       selectedTournament.users.forEach((user, i) => {
         if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
           indexToDelete = i
         }
       })
-      
       selectedTournament.users.splice(indexToDelete, 1)
+      
     }
 
     fetch('http://localhost:3000/competitions/delete', {
