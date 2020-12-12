@@ -100,16 +100,17 @@ const ShowTournament = () => {
     })
   }
 
-  const calculateUserPoints = (thisUser, currentTournament) => {
+  const calculateUserPoints = (thisUser) => {
     
     let total = 0;
-    users.map((user) => {
-      user.tasks.map((task) => {
-        if (task.tournament_id == currentTournament.id) {
-          total += task.points
-        }
+      selectedTournament.users.forEach((user) => {
+        // debugger
+        user.tasks.forEach((task) => {
+          if (task.tournament_id == selectedTournament.id) {
+            total += task.points
+          }
+        })
       })
-    })
     return total;
   }
 
@@ -178,7 +179,7 @@ const ShowTournament = () => {
       return (
         <div className="showtournament-ul">
           <p className="showtournament-user" key={user.id}>{user.username}</p>
-          <p className="showtournament-task-points">- {calculateUserPoints(user, selectedTournament)} points</p>
+          {/* <p className="showtournament-task-points">- {calculateUserPoints(user)} points</p> */}
         </div>
       )
     })
