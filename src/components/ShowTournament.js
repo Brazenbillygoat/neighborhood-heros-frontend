@@ -81,10 +81,12 @@ const ShowTournament = () => {
   }
 
   const logTask = (e) => {
+    let taskToLog = selectedTournament
     let task = {
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
       user_id: localStorage.getItem("myId")
     }
+    JSON.parse(localStorage.getItem("myId")).tasks.push()
 
     fetch('http://localhost:3000/completedtasks/log', {
       method: 'POST',
@@ -100,16 +102,17 @@ const ShowTournament = () => {
     })
   }
 
-  const calculateUserPoints = (thisUser) => {
+  const calculateUserPoints = (userId) => {
     
     let total = 0;
       selectedTournament.users.forEach((user) => {
-        // debugger
-        user.tasks.forEach((task) => {
-          if (task.tournament_id == selectedTournament.id) {
-            total += task.points
-          }
-        })
+        if (user.id == userId) {
+          user.tasks.forEach((task) => {
+            if (task.tournament_id == selectedTournament.id) {
+              total += task.points
+            }
+          })
+        }
       })
     return total;
   }
@@ -179,7 +182,7 @@ const ShowTournament = () => {
       return (
         <div className="showtournament-ul">
           <p className="showtournament-user" key={user.id}>{user.username}</p>
-          {/* <p className="showtournament-task-points">- {calculateUserPoints(user)} points</p> */}
+          <p className="showtournament-task-points">- {calculateUserPoints(user.id)} points</p>
         </div>
       )
     })
