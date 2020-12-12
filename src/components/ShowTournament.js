@@ -84,16 +84,21 @@ const ShowTournament = () => {
     let taskToLog = selectedTournament.tasks.find((task) => {
       return task.id == e.currentTarget.parentNode.getAttribute("myKey")
     })
-    let userToAttribute = selectedTournament.users.find((user) => {
-      return user.id == JSON.parse(localStorage.getItem("myId")).id
+    let userToAttribute = selectedTournament.users.forEach((user) => {
+      if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
+        user.tasks.push(taskToLog)
+      }
     })
 
     let task = {
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
       user_id: JSON.parse(localStorage.getItem("myId")).id
     }
-    JSON.parse(localStorage.getItem("myId")).tasks.push(taskToLog)
-    userToAttribute.tasks.push(taskToLog)
+    let updatedUser = JSON.parse(localStorage.getItem("myId"))
+    updatedUser.tasks.push(taskToLog)
+    localStorage.setItem("myId", JSON.stringify(updatedUser))
+    // userToAttribute.tasks.push(taskToLog)
+    
 
     fetch('http://localhost:3000/completedtasks/log', {
       method: 'POST',
@@ -139,7 +144,12 @@ const ShowTournament = () => {
         }
       })
       selectedTournament.users.splice(indexToDelete, 1)
-      
+      let tasksRemoved = JSON.parse(localStorage.getItem("myId")).tasks.filter((task) => {
+        return task.tournament_id != selectedTournament.id
+      })
+      let updatedUser = JSON.parse(localStorage.getItem("myId"))
+      updatedUser.tasks = tasksRemoved
+      localStorage.setItem("myId", JSON.stringify(updatedUser))
     }
 
     fetch('http://localhost:3000/competitions/delete', {
@@ -177,8 +187,7 @@ const ShowTournament = () => {
       },
       body: JSON.stringify(participant)
     })
-    .then(res => res.json())
-    .then(competition => {
+    .then(() => {
       dispatch(showTournament(selectedTournament))
     })
   }
