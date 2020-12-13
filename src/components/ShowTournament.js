@@ -46,13 +46,13 @@ const ShowTournament = () => {
   }
 
   const showDeleteLink = (task) => {
-    if (task.creator_id == localStorage.getItem("myId")) {
+    if (task.creator_id == JSON.parse(localStorage.getItem("myId")).id) {
       return <a className="log-task-link" onClick={(e) => deleteTask(e)}>delete</a>
     }
   }
 
   const showCreateTaskButton = () => {
-    if (selectedTournament.creator_id == localStorage.getItem("myId")) {
+    if (selectedTournament.creator_id == JSON.parse(localStorage.getItem("myId")).id) {
       return (
       <Link 
         className="tournament-button btn"
