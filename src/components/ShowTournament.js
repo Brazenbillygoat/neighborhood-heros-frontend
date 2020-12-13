@@ -225,19 +225,21 @@ const ShowTournament = () => {
       <div className="showtournament-div">
         <h1>{tournament.name}</h1>
         <h3 class="showtournament-description">{tournament.description}</h3>
-        <div className="showtournament-user-container">
-          <h4>Members of this tournament:</h4>
-          <ul>
-            {listUsers()}
-          </ul>
-          {displayJoinButton()}
-        </div>
-        <div className="showtournament-task-container">
-          <h4>Tasks for points:</h4>
-          <ul>
-            {listTasks()}
-          </ul>
-          {showCreateTaskButton()}
+        <div className="showtournament-users-and-tasks">
+          <div className="showtournament-user-container">
+            <h4>Members of this tournament:</h4>
+            <ul>
+              {listUsers()}
+            </ul>
+            {displayJoinButton()}
+          </div>
+          <div className="showtournament-task-container">
+            <h4>Tasks for points:</h4>
+            <ul>
+              {listTasks()}
+            </ul>
+            {showCreateTaskButton()}
+          </div>
         </div>
       </div>
     )

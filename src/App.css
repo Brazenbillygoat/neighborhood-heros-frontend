@@ -196,19 +196,20 @@ body {
   margin-right: 5rem;
 }
 
+.showtournament-users-and-tasks {
+  display: flex; 
+  align-items: top;
+  text-align: center;
+}
+
 .showtournament-task-container {
   display: inline-block;
-  float: left;
-  position: relative;
-  top: 0;
-  width: 43%;
+  width: 48%;
 }
 
 .showtournament-user-container {
   display: inline-block;
-  position: relative;
-  top: 0;
-  width: 43%;
+  width: 48%;
 }
 
 .showtournament-task {
