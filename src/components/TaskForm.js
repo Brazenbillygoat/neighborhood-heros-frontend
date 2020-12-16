@@ -19,9 +19,10 @@ function TaskForm() {
       name: newTaskName,
       description: newTaskDescription,
       points: newTaskPoints,
-      tournament_id: JSON.parse(localStorage.getItem("showTournament")).id,
-      creator_id: JSON.parse(localStorage.getItem("myId")).id
+      creator_id: JSON.parse(localStorage.getItem("myId")).id,
+      tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
+    selectedTournament.tasks.push(newTask);
     localStorage.setItem("taskCreated", true)
     fetch('http://localhost:3000/tasks/create', {
       method: 'POST',
