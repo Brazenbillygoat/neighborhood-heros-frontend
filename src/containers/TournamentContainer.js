@@ -13,8 +13,9 @@ class TournamentContainer extends Component {
   joinTournament = (e) => {
     let participant = {
       user_id: JSON.parse(localStorage.getItem("myId")).id,
-      tournament_id: e.currentTarget.parentNode.getAttribute("myKey")
+      tournament_id: e.currentTarget.parentNode.getAttribute("id")
     }
+
     fetch('http://localhost:3000/competitions/associate', {
       method: 'POST',
       headers: {
@@ -29,17 +30,33 @@ class TournamentContainer extends Component {
         setTimeout(() => {
           document.getElementsByClassName("tournament-list-error")[0].setAttribute("hidden", "true");
         }, 3000);
+      } else {
+        document.getElementById(`${data.tournament_id}`).children[2].setAttribute("disabled", "true");
+        this.props.tournaments.forEach(tournament => {
+          if (tournament.id == data.tournament_id) {
+            tournament.users.push(JSON.parse(localStorage.getItem("myId")))
+          }
+        });
       }
     })
+  }
+
+  joinButtonDisabled = (tournament) => {
+    if (tournament.users.includes(JSON.parse(localStorage.getItem("myId")))) {
+      return <button className="tournament-button btn join-button" disabled="true" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>
+    } else {
+      return <button className="tournament-button btn join-button" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>
+    }
   }
 
   createTournamentList = () => {
     return this.props.tournaments.map((tournament) => {
       return (
-        <div className="tournament-list-item" key={tournament.id} myKey={tournament.id}>
+        <div className="tournament-list-item" key={tournament.id} id={tournament.id}>
           <h4>{tournament.name}</h4>
           <p>{tournament.description}</p>
-          <button className="tournament-button btn" onClick={(e) => this.joinTournament(e)}>Join Tournament</button> 
+          {this.joinButtonDisabled(tournament)}
+          {/* <button className="tournament-button btn join-button" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>  */}
           <Link className="tournament-button btn" onClick={() => this.props.showTournament(tournament)} to={`/tournament/${tournament.id}`}>View Details</Link>
         </div>
       )
