@@ -72,7 +72,7 @@ function Navbar() {
             <Link className="navbar-sublink" to="/users">See Users</Link>
           </p>  
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" to="/tournaments">Active Tournaments</Link>
+            <Link className="navbar-sublink" to="/tournaments" onClick={() => fetchTournaments()}>Active Tournaments</Link>
           </p> 
         </>
       )

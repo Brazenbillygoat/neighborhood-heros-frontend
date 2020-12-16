@@ -63,7 +63,6 @@ class TournamentContainer extends Component {
           <h4>{tournament.name}</h4>
           <p>{tournament.description}</p>
           {this.joinButtonDisabled(tournament)}
-          {/* <button className="tournament-button btn join-button" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>  */}
           <Link className="tournament-button btn" onClick={() => this.props.showTournament(tournament)} to={`/tournament/${tournament.id}`}>View Details</Link>
         </div>
       )

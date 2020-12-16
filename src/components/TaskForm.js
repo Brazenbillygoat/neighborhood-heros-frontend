@@ -1,35 +1,39 @@
 
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { taskName, taskDescription, taskPoints } from '../actions/taskForm';
+import { showTournament } from '../actions/tournaments';
 
 
 function TaskForm() {
   const newTaskName = useSelector(state => state.newTask.name);
   const newTaskDescription = useSelector(state => state.newTask.description);
   const newTaskPoints = useSelector(state => state.newTask.points);
-  const currentTournament = useSelector(state => state.selectedTournament)
+  const selectedTournament = useSelector(state => state.selectedTournament)
 
   const dispatch = useDispatch();
 
 
   const backToActiveTournaments = () => {
     if (localStorage.getItem("taskCreated") == "true") {
-      return <Redirect to={`/tournament/${currentTournament.id}`} />
+      debugger
+      dispatch(showTournament(JSON.parse(localStorage.getItem("showTournament"))))
+      debugger
+      return <Redirect to={`/tournament/${selectedTournament.id}`} />
     }
   }
 
   const createTask = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     let newTask ={
       name: newTaskName,
       description: newTaskDescription,
       points: newTaskPoints,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id,
-      creator_id: JSON.parse(localStorage.getItem("myId"))
+      creator_id: JSON.parse(localStorage.getItem("myId")).id
     }
-
+    localStorage.setItem("taskCreated", true)
     fetch('http://localhost:3000/tasks/create', {
       method: 'POST',
       headers: {
@@ -39,13 +43,12 @@ function TaskForm() {
     })
     .then(res => res.json())
     .then(task => {
-      window.location.reload();
-      localStorage.setItem("taskCreated", true)
+      // window.location.reload();
       console.log(task)
     })
-    .catch(err => {
+    .catch((error) => {
       <Redirect to='/tournaments' />
-      console.log(err)
+      console.log(error)
     })
   }
   
@@ -53,11 +56,11 @@ function TaskForm() {
   return (
 
     <div className="create-task-form">
-    {backToActiveTournaments()}
     <h1>Add new task to tournament</h1>
     <form onSubmit={createTask}>
       <h2 className="taskform-header">{}</h2>
       <label>
+    {/* {backToActiveTournaments()} */}
         <h4>Task Name:</h4>
         <input className="login-input"
                 type="text" 
@@ -85,7 +88,7 @@ function TaskForm() {
         />
       </label>
       <br/>
-      <input className="btn btn-primary" type="submit" value="Create" onClick={() => backToActiveTournaments()} />
+      <Link to={`/tournament/${selectedTournament.id}`} onClick={() => createTask()}><input className="btn btn-primary" type="submit" value="Create" /> </Link>
     </form>
 
 
