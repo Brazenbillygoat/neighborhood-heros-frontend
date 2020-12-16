@@ -14,18 +14,7 @@ function TaskForm() {
 
   const dispatch = useDispatch();
 
-
-  const backToActiveTournaments = () => {
-    if (localStorage.getItem("taskCreated") == "true") {
-      debugger
-      dispatch(showTournament(JSON.parse(localStorage.getItem("showTournament"))))
-      debugger
-      return <Redirect to={`/tournament/${selectedTournament.id}`} />
-    }
-  }
-
-  const createTask = (e) => {
-    // e.preventDefault();
+  const createTask = () => {
     let newTask ={
       name: newTaskName,
       description: newTaskDescription,
@@ -43,7 +32,6 @@ function TaskForm() {
     })
     .then(res => res.json())
     .then(task => {
-      // window.location.reload();
       console.log(task)
     })
     .catch((error) => {
@@ -60,7 +48,6 @@ function TaskForm() {
     <form onSubmit={createTask}>
       <h2 className="taskform-header">{}</h2>
       <label>
-    {/* {backToActiveTournaments()} */}
         <h4>Task Name:</h4>
         <input className="login-input"
                 type="text" 
