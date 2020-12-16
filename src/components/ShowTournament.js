@@ -89,9 +89,9 @@ const ShowTournament = () => {
         user.tasks.push(taskToLog)
       }
     })
-debugger
+
     let task = {
-      task_name: "hi",
+      task_name: e.currentTarget.parentNode.children[0].innerText,
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
       user_id: JSON.parse(localStorage.getItem("myId")).id
     }
