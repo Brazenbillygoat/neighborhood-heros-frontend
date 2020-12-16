@@ -42,15 +42,22 @@ class TournamentContainer extends Component {
   }
 
   joinButtonDisabled = (tournament) => {
-    if (tournament.users.includes(JSON.parse(localStorage.getItem("myId")))) {
+    let userHasJoined = false;
+    tournament.users.forEach( (user) => {
+      if (user.username == JSON.parse(localStorage.getItem("myId")).username) {
+        userHasJoined = true;
+      }
+    })
+    if (userHasJoined) {
       return <button className="tournament-button btn join-button" disabled="true" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>
-    } else {
-      return <button className="tournament-button btn join-button" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>
     }
+    return <button className="tournament-button btn join-button" onClick={(e) => this.joinTournament(e)}>Join Tournament</button>
   }
 
   createTournamentList = () => {
+
     return this.props.tournaments.map((tournament) => {
+      
       return (
         <div className="tournament-list-item" key={tournament.id} id={tournament.id}>
           <h4>{tournament.name}</h4>
@@ -68,7 +75,7 @@ class TournamentContainer extends Component {
     localStorage.setItem("taskCreated", false)
     return(
       <div className="tournaments-container">
-      <p className="tournament-list-error" hidden>You've already joined this tournament.</p>
+        <p className="tournament-list-error" hidden>You've already joined this tournament.</p>
         
         {this.createTournamentList()}
 
