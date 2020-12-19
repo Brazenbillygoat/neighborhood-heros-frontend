@@ -32,7 +32,6 @@ const TournamentForm = () => {
       endDate: newTournamentEndDate,
       creatorId: JSON.parse(localStorage.getItem("myId")).id
     }
-    console.log(tournament)
     fetch('http://localhost:3000/tournaments/create', {
       method: 'POST',
       headers: {
