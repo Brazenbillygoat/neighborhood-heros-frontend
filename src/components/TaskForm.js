@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
 import { taskName, taskDescription, taskPoints } from '../actions/taskForm';
-import { showTournament } from '../actions/tournaments';
+import { showTournament, getTournaments, pastTournaments } from '../actions/tournaments';
+
 
 
 function TaskForm() {
