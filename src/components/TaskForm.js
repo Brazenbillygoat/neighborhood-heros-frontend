@@ -14,6 +14,34 @@ function TaskForm() {
 
   const dispatch = useDispatch();
 
+  const fetchTournaments = () => {
+    fetch('http://localhost:3000/tournaments')
+      .then(res => res.json())
+      .then(tournaments => {
+        let endedTournaments = [];
+        let activeTournaments = [];
+        //dividing tournaments into active or past depending on enddate
+        tournaments.forEach((tournament) => {
+          let endDateArray = tournament.end_date.split(/\D+/);
+          let endDate = new Date(
+            parseInt(endDateArray[0]),
+            parseInt(endDateArray[1] - 1),
+            parseInt(endDateArray[2]),
+            parseInt(endDateArray[3]),
+            parseInt(endDateArray[4])
+          )
+          if (endDate.getTime() >= Date.now()) {
+            activeTournaments.push(tournament)
+          } else {
+            // endedTournaments.push(tournament)
+          }
+        })
+        dispatch(getTournaments(activeTournaments));
+        dispatch(pastTournaments(endedTournaments));
+      })
+  }
+
+  //Need to implement thunk in the method below
   const createTask = () => {
     let newTask ={
       name: newTaskName,
@@ -23,6 +51,7 @@ function TaskForm() {
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
     selectedTournament.tasks.push(newTask);
+    dispatch(showTournament(selectedTournament));
     localStorage.setItem("taskCreated", true)
     fetch('http://localhost:3000/tasks/create', {
       method: 'POST',
@@ -34,6 +63,7 @@ function TaskForm() {
     .then(res => res.json())
     .then(task => {
       console.log(task)
+      fetchTournaments()
     })
     .catch((error) => {
       <Redirect to='/tournaments' />

@@ -64,6 +64,7 @@ const ShowTournament = () => {
   }
 
   const deleteTask = (e) => {
+    
     let task = {
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
     }
