@@ -87,12 +87,12 @@ const ShowTournament = () => {
   }
 
   const deleteTask = (e) => {
-    
+    let taskId = e.currentTarget.parentNode.getAttribute("myKey");
     let task = {
-      task_id: e.currentTarget.parentNode.getAttribute("myKey"),
+      task_id: taskId
     }
 
-    
+    selectedTournament.tasks = selectedTournament.tasks.filter((task) => task.id != taskId);
 
     fetch('http://localhost:3000/tasks/delete', {
       method: 'POST',
@@ -101,12 +101,9 @@ const ShowTournament = () => {
       },
       body: JSON.stringify(task)
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      // debugger
+    .then(() => {
+      dispatch(showTournament(selectedTournament));
     })
-    .catch((err) => console.log(err))
   }
 
   const logTask = (e) => {
@@ -218,7 +215,7 @@ const ShowTournament = () => {
       body: JSON.stringify(participant)
     })
     .then(() => {
-      dispatch(showTournament(selectedTournament))
+      dispatch(showTournament(selectedTournament));
     })
   }
 

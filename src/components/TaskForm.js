@@ -52,12 +52,15 @@ function TaskForm() {
       creator_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
+
     const findSelectedTournament = (tournament) => {
       if (tournament.id === selectedTournament.id) {
         return tournament
       }
     }
-    let updatedTournament = stateTournaments.find((tournament) => findSelectedTournament(tournament))
+    let updatedTournament = stateTournaments.find((tournament) => findSelectedTournament(tournament));
+    updatedTournament.tasks.push(newTask);
+
     dispatch(showTournament(updatedTournament));
     localStorage.setItem("taskCreated", true);
 
