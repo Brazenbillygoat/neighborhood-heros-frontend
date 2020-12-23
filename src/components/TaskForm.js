@@ -52,11 +52,15 @@ function TaskForm() {
       creator_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
-    let updatedTournament = stateTournaments.find((tournament) => {
-      // tournament.id === selectedTournament.id
-    })
+    const findSelectedTournament = (tournament) => {
+      if (tournament.id === selectedTournament.id) {
+        return tournament
+      }
+    }
+    let updatedTournament = stateTournaments.find((tournament) => findSelectedTournament(tournament))
     dispatch(showTournament(updatedTournament));
-    localStorage.setItem("taskCreated", true)
+    localStorage.setItem("taskCreated", true);
+
     fetch('http://localhost:3000/tasks/create', {
       method: 'POST',
       headers: {

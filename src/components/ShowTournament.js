@@ -92,7 +92,7 @@ const ShowTournament = () => {
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
     }
 
-    // debugger
+    
 
     fetch('http://localhost:3000/tasks/delete', {
       method: 'POST',
