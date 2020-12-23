@@ -69,7 +69,12 @@ const ShowTournament = () => {
 
   const showDeleteLink = (task) => {
     if (task.creator_id == JSON.parse(localStorage.getItem("myId")).id) {
-      return <a className="log-task-link" onClick={(e) => deleteTask(e)}>delete</a>
+      return <Link 
+          className="log-task-link" 
+          onClick={deleteTask}
+          to={`/tournament/${JSON.parse(localStorage.getItem("showTournament")).id}`}>
+          delete
+        </Link>
     }
   }
 
@@ -91,8 +96,8 @@ const ShowTournament = () => {
     let task = {
       task_id: taskId
     }
-
     selectedTournament.tasks = selectedTournament.tasks.filter((task) => task.id != taskId);
+    
 
     fetch('http://localhost:3000/tasks/delete', {
       method: 'POST',
@@ -187,7 +192,7 @@ const ShowTournament = () => {
       body: JSON.stringify(participant)
     })
     .then(() => {
-      dispatch(showTournament(selectedTournament))
+      dispatch(showTournament(selectedTournament));
     })
     .catch((err) => {
       console.log(err)
