@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { proxyUpdate } from '../actions/proxy';
-import { showTournament } from '../actions/tournaments';
+import { showTournament, getTournaments } from '../actions/tournaments';
 import { addPoints } from '../actions/myPoints';
 import { useEffect } from 'react';
 
@@ -17,7 +17,29 @@ const ShowTournament = () => {
   const tournament = JSON.parse(localStorage.getItem("showTournament"));
   const myPoints = useSelector(state => state.myPoints);
   
-  
+  const fetchTournaments = () => {
+    fetch('http://localhost:3000/tournaments')
+      .then(res => res.json())
+      .then(tournaments => {
+        let activeTournaments = [];
+        //dividing tournaments into active or past depending on enddate
+        tournaments.forEach((tournament) => {
+          let endDateArray = tournament.end_date.split(/\D+/);
+          let endDate = new Date(
+            parseInt(endDateArray[0]),
+            parseInt(endDateArray[1] - 1),
+            parseInt(endDateArray[2]),
+            parseInt(endDateArray[3]),
+            parseInt(endDateArray[4])
+          )
+          if (endDate.getTime() >= Date.now()) {
+            activeTournaments.push(tournament)
+          }
+        })
+        dispatch(getTournaments(activeTournaments));
+      })
+  }
+
   const checkUserIsMember = () => {
     let memberIds = []
     for (let member of selectedTournament.users) {
@@ -56,6 +78,7 @@ const ShowTournament = () => {
       return (
       <Link 
         className="tournament-button btn"
+        onClick={() => fetchTournaments()}
         to={`/tasks/new`}>
         Create Task
       </Link> 
@@ -69,6 +92,8 @@ const ShowTournament = () => {
       task_id: e.currentTarget.parentNode.getAttribute("myKey"),
     }
 
+    // debugger
+
     fetch('http://localhost:3000/tasks/delete', {
       method: 'POST',
       headers: {
@@ -77,7 +102,10 @@ const ShowTournament = () => {
       body: JSON.stringify(task)
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)
+      // debugger
+    })
     .catch((err) => console.log(err))
   }
 

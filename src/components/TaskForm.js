@@ -8,6 +8,7 @@ import { showTournament, getTournaments, pastTournaments } from '../actions/tour
 
 
 function TaskForm() {
+  const stateTournaments = useSelector(state => state.tournaments);
   const newTaskName = useSelector(state => state.newTask.name);
   const newTaskDescription = useSelector(state => state.newTask.description);
   const newTaskPoints = useSelector(state => state.newTask.points);
@@ -43,7 +44,7 @@ function TaskForm() {
   }
 
   //Need to implement thunk in the method below
-  const createTask = () => {
+  const createTask = (selectedTournament) => {
     let newTask ={
       name: newTaskName,
       description: newTaskDescription,
@@ -51,8 +52,10 @@ function TaskForm() {
       creator_id: JSON.parse(localStorage.getItem("myId")).id,
       tournament_id: JSON.parse(localStorage.getItem("showTournament")).id
     }
-    selectedTournament.tasks.push(newTask);
-    dispatch(showTournament(selectedTournament));
+    let updatedTournament = stateTournaments.find((tournament) => {
+      // tournament.id === selectedTournament.id
+    })
+    dispatch(showTournament(updatedTournament));
     localStorage.setItem("taskCreated", true)
     fetch('http://localhost:3000/tasks/create', {
       method: 'POST',
@@ -107,7 +110,7 @@ function TaskForm() {
         />
       </label>
       <br/>
-      <Link to={`/tournament/${selectedTournament.id}`} onClick={() => createTask()}><input className="btn btn-primary" type="submit" value="Create" /> </Link>
+      <Link to={`/tournament/${selectedTournament.id}`} onClick={() => createTask(selectedTournament)}><input className="btn btn-primary" type="submit" value="Create" /> </Link>
     </form>
 
 
