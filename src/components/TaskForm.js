@@ -119,6 +119,7 @@ function TaskForm() {
       <br/>
       <Link to={`/tournament/${selectedTournament.id}`} onClick={() => createTask(selectedTournament)}><input className="btn btn-primary" type="submit" value="Create" /> </Link>
     </form>
+      <Link className="btn btn-primary task-back-button" to={`/tournament/${selectedTournament.id}`}>Back</Link>
 
 
     </div>
