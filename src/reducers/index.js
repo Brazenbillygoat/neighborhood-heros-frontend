@@ -2,8 +2,8 @@
 import {combineReducers} from 'redux';
 import loggedReducer from './isLogged';
 import usersReducer from './users';
-import usernameReducer from './username';
-import passwordReducer from './password';
+// import usernameReducer from './username';
+// import passwordReducer from './password';
 // import confirmPasswordReducer from './confirmPassword';
 import userExistsReducer from './userExists';
 import selectedUser from './showUser';
@@ -27,8 +27,8 @@ const allReducers = combineReducers({
   newTask: newTaskReducer,
   isLogged: loggedReducer,
   userExists: userExistsReducer,
-  username: usernameReducer,
-  password: passwordReducer,
+  // username: usernameReducer,
+  // password: passwordReducer,
   // confirmPassword: confirmPasswordReducer,
   selectedUser: selectedUser,
   tournament: tournament,
