@@ -67,6 +67,7 @@ const TournamentForm = () => {
             type="text"
             value={newTournamentName}
             onChange={(e) => dispatch(tournamentName(e.target.value))}
+            required
           />
           <h4>Description:</h4>
           <textarea 
