@@ -16,20 +16,22 @@ import pastTournaments from './pastTournamentsReducer';
 import proxyUpdate from './proxyReducer';
 import myPoints from './myPointsReducer';
 import winners from './winnersReducer';
+import newUser from './newUserReducer';
 
 const allReducers = combineReducers({
-  isLogged: loggedReducer,
   users: usersReducer,
+  newUser: newUser,
+  tournaments: tournaments,
+  selectedTournament: selectedTournament,
+  newTournament: newTournamentReducer,
+  newTask: newTaskReducer,
+  isLogged: loggedReducer,
+  userExists: userExistsReducer,
   username: usernameReducer,
   password: passwordReducer,
   confirmPassword: confirmPasswordReducer,
-  userExists: userExistsReducer,
   selectedUser: selectedUser,
-  newTournament: newTournamentReducer,
-  newTask: newTaskReducer,
   tournament: tournament,
-  tournaments: tournaments,
-  selectedTournament: selectedTournament,
   pastTournaments: pastTournaments,
   proxy: proxyUpdate,
   myPoints: myPoints,
