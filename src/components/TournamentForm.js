@@ -17,7 +17,6 @@ const TournamentForm = () => {
 
   const datesChronologicallySound = () => {
     if (newTournamentStartDate !== "" && newTournamentEndDate !== "") {
-      // debugger
       if (newTournamentStartDate > newTournamentEndDate) {
         document.getElementById("create-tournament-button").setAttribute("disabled", "true");
         return <p className="newtournament-date-validation">End date must be after the start date.</p>
