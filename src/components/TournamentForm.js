@@ -16,11 +16,20 @@ const TournamentForm = () => {
 
 
   const datesChronologicallySound = () => {
-    if (newTournamentStartDate >= newTournamentEndDate) {
-      return <p className="newtournament-date-validation">End date must be after the start date.</p>
-    } else if (newTournamentEndDate >= Date()) {
-      return <p className="newtournament-date-validation">End date must be after today's date.</p>
-    }
+    if (newTournamentStartDate !== "" && newTournamentEndDate !== "") {
+      // debugger
+      if (newTournamentStartDate > newTournamentEndDate) {
+        document.getElementById("create-tournament-button").setAttribute("disabled", "true");
+        return <p className="newtournament-date-validation">End date must be after the start date.</p>
+      } else if (newTournamentEndDate < new Date().toJSON().slice(0,10)) {
+        document.getElementById("create-tournament-button").setAttribute("disabled", "true");
+        return <p className="newtournament-date-validation">End date must be after today's date.</p>
+      } else if (newTournamentStartDate === newTournamentEndDate) {
+        document.getElementById("create-tournament-button").setAttribute("disabled", "true");
+        return <p className="newtournament-date-validation">Tournament must be at least 24 hours.</p>
+      }
+      document.getElementById("create-tournament-button").removeAttribute("disabled");
+    }  
   }
 
   const createTournament = (e) => {
@@ -69,21 +78,23 @@ const TournamentForm = () => {
           <h4>Start Date:</h4>
           <input 
             className="tournament-form-input"
-            type="datetime-local" 
+            type="date" 
             value={newTournamentStartDate}
             onChange={(e) => dispatch(tournamentStartDate(e.target.value))}
+            required
             />
           <h4>End Date:</h4>
           {datesChronologicallySound()}
           <input 
             className="tournament-form-input"
-            type="datetime-local" 
+            type="date" 
             value={newTournamentEndDate}
             onChange={(e) => dispatch(tournamentEndDate(e.target.value))}
+            required
             />
         </label>
         <br/>
-        <input className="btn btn-primary" type="submit" value="Create"/>
+        <input id="create-tournament-button" className="btn btn-primary" type="submit" value="Create"/>
       </form>
 
     </div>
