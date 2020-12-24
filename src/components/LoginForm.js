@@ -6,9 +6,9 @@ import { Redirect } from 'react-router-dom';
 
 
 function LoginForm() {
-  const myUsername = useSelector(state => state.username);
-  const myPassword = useSelector(state => state.password);
-  const myConfirmPassword = useSelector(state => state.confirmPassword);
+  const myUsername = useSelector(state => state.newUser.username);
+  const myPassword = useSelector(state => state.newUser.password);
+  const myConfirmPassword = useSelector(state => state.newUser.confirmPassword);
   const userExists = useSelector(state => state.userExists);
   const dispatch = useDispatch();
 
