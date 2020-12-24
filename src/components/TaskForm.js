@@ -43,7 +43,7 @@ function TaskForm() {
       })
   }
 
-  //Need to implement thunk in the method below
+  //Need to implement thunk in the method below next refactor
   const createTask = (selectedTournament) => {
     let newTask ={
       name: newTaskName,
@@ -74,6 +74,9 @@ function TaskForm() {
     .then(res => res.json())
     .then(task => {
       console.log(task)
+      dispatch(taskName(""));
+      dispatch(taskDescription(""));
+      dispatch(taskPoints(5));
       fetchTournaments()
     })
     .catch((error) => {
