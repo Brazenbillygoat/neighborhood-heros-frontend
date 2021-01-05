@@ -61,10 +61,9 @@ function Navbar() {
     if (localStorage.getItem("myId")) {
       return (
         <>
-          <p className="navbar-list-item">
-          {/* adjust below route to take an id number */}
+          {/* <p className="navbar-list-item">
             <Link className="navbar-sublink" to="/profile/:id">Profile</Link> 
-          </p>
+          </p> */}
           <p className="navbar-list-item">
             <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
           </p>
