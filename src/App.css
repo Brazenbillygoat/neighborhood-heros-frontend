@@ -264,3 +264,9 @@ body {
   padding-bottom: 2rem;
   width: 40%;
 }
+
+.user-list-profile-pic {
+  border-radius: 10px;
+  height: 35%;
+  width: 35%;
+}
