@@ -16,7 +16,7 @@ class TournamentContainer extends Component {
       tournament_id: e.currentTarget.parentNode.getAttribute("id")
     }
 
-    fetch('http://localhost:3000/competitions/associate', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/competitions/associate', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

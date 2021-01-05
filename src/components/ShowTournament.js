@@ -18,7 +18,7 @@ const ShowTournament = () => {
   const myPoints = useSelector(state => state.myPoints);
   
   const fetchTournaments = () => {
-    fetch('http://localhost:3000/tournaments')
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments')
       .then(res => res.json())
       .then(tournaments => {
         let activeTournaments = [];
@@ -99,7 +99,7 @@ const ShowTournament = () => {
     selectedTournament.tasks = selectedTournament.tasks.filter((task) => task.id != taskId);
     
 
-    fetch('http://localhost:3000/tasks/delete', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/tasks/delete', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -132,7 +132,7 @@ const ShowTournament = () => {
     // userToAttribute.tasks.push(taskToLog)
     
 
-    fetch('http://localhost:3000/completedtasks/log', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/completedtasks/log', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -184,7 +184,7 @@ const ShowTournament = () => {
       localStorage.setItem("myId", JSON.stringify(updatedUser))
     }
 
-    fetch('http://localhost:3000/competitions/delete', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/competitions/delete', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -212,7 +212,7 @@ const ShowTournament = () => {
       selectedTournament.users.push(JSON.parse(localStorage.getItem("myId")))
     }
     
-    fetch('http://localhost:3000/competitions/associate', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/competitions/associate', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

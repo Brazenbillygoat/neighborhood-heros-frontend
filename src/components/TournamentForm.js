@@ -40,7 +40,7 @@ const TournamentForm = () => {
       endDate: newTournamentEndDate,
       creatorId: JSON.parse(localStorage.getItem("myId")).id
     }
-    fetch('http://localhost:3000/tournaments/create', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ const TournamentForm = () => {
     })
     .then(res => res.json())
     .then(data => {
-      window.location.href="http://localhost:3001/tournaments";
+      window.location.href="https://neighborhood-heroes-backend.herokuapp.com/tournaments";
       window.location.reload();
     })
   }

@@ -12,7 +12,7 @@ class UserContainer extends Component {
       follower_id: localStorage.getItem("myId"),
       followed_id: e.currentTarget.parentNode.getAttribute("myKey")
     }
-    fetch('http://localhost:3000/relationship/friend', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/relationship/friend', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

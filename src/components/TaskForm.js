@@ -17,7 +17,7 @@ function TaskForm() {
   const dispatch = useDispatch();
 
   const fetchTournaments = () => {
-    fetch('http://localhost:3000/tournaments')
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments')
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
@@ -64,7 +64,7 @@ function TaskForm() {
     dispatch(showTournament(updatedTournament));
     localStorage.setItem("taskCreated", true);
 
-    fetch('http://localhost:3000/tasks/create', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/tasks/create', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
