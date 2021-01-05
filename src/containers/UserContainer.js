@@ -24,11 +24,20 @@ class UserContainer extends Component {
       console.log(friendship)
     })
   }
+
+  unfriend = () => {
+
+  }
+
+  showAddOrRemoveFriendButton = () => {
+
+  }
   
   createUserList() {
     return this.props.users.map((user) => {
       return(
         <div className="users-container" key={user.id} myKey={user.id}>
+        <img src={user.profile_pic}/>
         <p onClick={() => this.props.showUser(user)}>{user.username}</p>
         <button onClick={(e) => this.beFriend(e)}>Add Friend</button>
         </div>
