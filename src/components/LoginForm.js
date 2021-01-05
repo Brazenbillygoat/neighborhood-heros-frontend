@@ -39,7 +39,7 @@ function LoginForm() {
         password: myPassword
       }
       
-      fetch('http://localhost:3000/users/create', {
+      fetch('https://neighborhood-heroes-backend.herokuapp.com/users/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ function LoginForm() {
       password: myPassword
     }
     
-    fetch('http://localhost:3000/login', {
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
