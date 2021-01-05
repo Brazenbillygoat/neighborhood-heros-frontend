@@ -251,8 +251,21 @@ body {
 
 /* USERS */
 
-.users-container {
+.user-card {
   background-color: cornsilk;
+  border: solid black;
+  border-radius: 10px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  opacity: .85;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.users-container {
+  /* background-color: cornsilk;
   border: solid black;
   border-radius: 10px;
   font-weight: 600;
@@ -262,10 +275,11 @@ body {
   opacity: .85;
   padding-top: 1rem;
   padding-bottom: 2rem;
-  width: 40%;
+  width: 60%; */
 }
 
 .user-list-profile-pic {
+  border: solid black 1px;
   border-radius: 10px;
   height: 35%;
   width: 35%;
