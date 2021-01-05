@@ -264,20 +264,6 @@ body {
   padding-bottom: 2rem;
 }
 
-.users-container {
-  /* background-color: cornsilk;
-  border: solid black;
-  border-radius: 10px;
-  font-weight: 600;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  margin-left: 30%;
-  opacity: .85;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
-  width: 60%; */
-}
-
 .user-list-profile-pic {
   border: solid black 1px;
   border-radius: 10px;
