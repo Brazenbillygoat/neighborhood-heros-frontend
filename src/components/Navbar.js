@@ -15,7 +15,7 @@ function Navbar() {
 
   const fetchUsers = () => {
     if (localStorage.getItem("myId")) {
-      fetch('http://localhost:3000/users')
+      fetch('https://neighborhood-heroes-backend.herokuapp.com/users')
       .then(res => res.json())
       .then(users => {
         dispatch(getUsers(users));
@@ -24,7 +24,7 @@ function Navbar() {
   }
 
   const fetchTournaments = () => {
-    fetch('http://localhost:3000/tournaments')
+    fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments')
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
