@@ -36,10 +36,17 @@ class UserContainer extends Component {
   createUserList() {
     return this.props.users.map((user) => {
       return(
-        <div className="users-container" key={user.id} myKey={user.id}>
-        <img src={user.profile_pic} class="user-list-profile-pic" />
-        <p onClick={() => this.props.showUser(user)}>{user.username}</p>
-        <button onClick={(e) => this.beFriend(e)}>Add Friend</button>
+        <div className="col-md-6">
+          <div className="users-container" key={user.id} myKey={user.id}>
+            <div className="">
+              <img src={user.profile_pic} className="user-list-profile-pic" />
+              <p onClick={() => this.props.showUser(user)}>{user.username}</p>
+            </div>
+            <div className="">
+              <h4> Tournaments Joined:</h4>
+            </div>
+          </div>
+          <button onClick={(e) => this.beFriend(e)}>Add Friend</button>
         </div>
       )}
     )
@@ -47,8 +54,10 @@ class UserContainer extends Component {
 
   render() {
     return (
-      <div>
-             {this.createUserList()}
+      <div className="container">
+        <div className="row">
+          {this.createUserList()}
+        </div>
       </div>
     )
   }
