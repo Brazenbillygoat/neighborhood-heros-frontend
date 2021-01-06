@@ -16,8 +16,12 @@ function TaskForm() {
 
   const dispatch = useDispatch();
 
+
+  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+
   const fetchTournaments = () => {
-    fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments')
+    fetch(`${baseUrl}/tournaments`)
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
@@ -64,7 +68,7 @@ function TaskForm() {
     dispatch(showTournament(updatedTournament));
     localStorage.setItem("taskCreated", true);
 
-    fetch('https://neighborhood-heroes-backend.herokuapp.com/tasks/create', {
+    fetch(`${baseUrl}/tasks/create`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
