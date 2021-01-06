@@ -1,6 +1,8 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { username, password, confirmPassword } from '../actions/loginForm';
+import { getUsers } from '../actions';
+import { getTournaments, pastTournaments } from '../actions/tournaments';
 import { Redirect } from 'react-router-dom';
 // import userExists from '../reducers/userExists';
 
