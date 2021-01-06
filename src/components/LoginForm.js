@@ -15,6 +15,9 @@ function LoginForm() {
   const dispatch = useDispatch();
 
 
+  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+
   const showLoginOrSignup = () => {
     return userExists ? "Log in" : "Sign up"
   }
@@ -41,7 +44,7 @@ function LoginForm() {
         password: myPassword
       }
       
-      fetch('https://neighborhood-heroes-backend.herokuapp.com/users/create', {
+      fetch(`${baseUrl}/users/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -50,12 +53,12 @@ function LoginForm() {
       })
       .then(res => res.json())
       .then(user => {
-        fetch('https://neighborhood-heroes-backend.herokuapp.com/users')
+        fetch(`${baseUrl}/users`)
         .then(res => res.json())
         .then(users => {
           dispatch(getUsers(users));
         })
-        fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments')
+        fetch(`${baseUrl}/tournaments`)
         .then(res => res.json())
         .then(tournaments => {
           let endedTournaments = [];
@@ -96,7 +99,7 @@ function LoginForm() {
       password: myPassword
     }
     
-    fetch('https://neighborhood-heroes-backend.herokuapp.com/login', {
+    fetch(`${baseUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -105,12 +108,12 @@ function LoginForm() {
     })
     .then(res => res.json())
     .then(user => {
-      fetch('https://neighborhood-heroes-backend.herokuapp.com/users')
+      fetch(`${baseUrl}/users`)
       .then(res => res.json())
       .then(users => {
         dispatch(getUsers(users));
       })
-      fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments')
+      fetch(`${baseUrl}/tournaments`)
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
