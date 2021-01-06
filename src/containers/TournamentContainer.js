@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 class TournamentContainer extends Component {
   
   
+  baseUrl = "http://localhost:3000";
+  baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   joinTournament = (e) => {
     let participant = {
@@ -16,7 +18,7 @@ class TournamentContainer extends Component {
       tournament_id: e.currentTarget.parentNode.getAttribute("id")
     }
 
-    fetch('https://neighborhood-heroes-backend.herokuapp.com/competitions/associate', {
+    fetch(`${baseUrl}/competitions/associate`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
