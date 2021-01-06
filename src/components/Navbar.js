@@ -68,7 +68,7 @@ function Navbar() {
             <Link className="navbar-sublink" to="/tournament/new">Create Tournament</Link>
           </p>
           <p className="navbar-list-item">
-            <Link className="navbar-sublink" to="/users">See Users</Link>
+            <Link className="navbar-sublink" to="/users" onClick={() => fetchUsers()} >See Users</Link>
           </p>  
           <p className="navbar-list-item">
             <Link className="navbar-sublink" to="/tournaments" onClick={() => fetchTournaments()}>Active Tournaments</Link>
