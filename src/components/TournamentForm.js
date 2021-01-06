@@ -15,6 +15,9 @@ const TournamentForm = () => {
   const dispatch = useDispatch();
 
 
+  const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+
   const datesChronologicallySound = () => {
     if (newTournamentStartDate !== "" && newTournamentEndDate !== "") {
       if (newTournamentStartDate > newTournamentEndDate) {
@@ -40,7 +43,7 @@ const TournamentForm = () => {
       endDate: newTournamentEndDate,
       creatorId: JSON.parse(localStorage.getItem("myId")).id
     }
-    fetch('https://neighborhood-heroes-backend.herokuapp.com/tournaments/create', {
+    fetch(`${baseUrl}/tournaments/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -49,7 +52,7 @@ const TournamentForm = () => {
     })
     .then(res => res.json())
     .then(data => {
-      window.location.href="https://neighborhood-heroes-backend.herokuapp.com/tournaments";
+      window.location.href=`${baseUrl}/tournaments`;
       window.location.reload();
     })
   }
