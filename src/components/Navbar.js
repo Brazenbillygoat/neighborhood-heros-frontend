@@ -14,7 +14,7 @@ function Navbar() {
 
 
   const baseUrl = "http://localhost:3000";
-  const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+  // const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   const fetchUsers = () => {
     if (localStorage.getItem("myId")) {

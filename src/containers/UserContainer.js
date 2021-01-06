@@ -7,14 +7,14 @@ import { bindActionCreators } from 'redux';
 
 class UserContainer extends Component {
   baseUrl = "http://localhost:3000";
-  baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+  // baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   beFriend = (e) => {
     let friends = {
       follower_id: localStorage.getItem("myId"),
       followed_id: e.currentTarget.parentNode.getAttribute("myKey")
     }
-    fetch(`${baseUrl}/relationship/friend`, {
+    fetch(`${this.baseUrl}/relationship/friend`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
