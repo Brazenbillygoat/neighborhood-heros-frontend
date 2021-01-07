@@ -9,11 +9,11 @@ class UserContainer extends Component {
   baseUrl = "http://localhost:3000";
   // baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
-  beFriend = (e) => {
+  beFriend = (userId) => {
     let friends = {
-      follower_id: localStorage.getItem("myId"),
-      followed_id: e.currentTarget.parentNode.getAttribute("myKey")
-    }
+      follower_id: JSON.parse(localStorage.getItem("myId")).id,
+      followed_id: userId
+    };
     fetch(`${this.baseUrl}/relationship/friend`, {
       method: 'POST',
       headers: {
@@ -27,11 +27,28 @@ class UserContainer extends Component {
     })
   }
 
-  unfriend = () => {
-
+  unFriend = () => {
+    console.log("You unfriended me");
   }
 
-  showAddOrRemoveFriendButton = () => {
+  showAddOrRemoveFriendButton = (user) => {
+    const sessionUser = JSON.parse(localStorage.getItem("myId"));
+    debugger
+    let isFriend = false;
+    sessionUser.followers.forEach((friend) => {
+      if (friend.followed_id === user.id || friend.follower_id === user.id) {
+        return isFriend = true;
+      };
+    });
+
+    if (isFriend) {
+      return <button onClick={(e) => this.beFriend(user.id)}>Add Friend</button>
+    } else {
+      return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
+    }
+  }
+
+  tournamentsForUser = () => {
 
   }
   
@@ -46,9 +63,14 @@ class UserContainer extends Component {
             </div>
             <div className="col-sm-6">
               <h4> Tournaments Joined:</h4>
+              <ul>
+                <li>
+
+                </li>
+              </ul>
             </div>
           </div>
-          <button onClick={(e) => this.beFriend(e)}>Add Friend</button>
+          {this.showAddOrRemoveFriendButton(user)}
         </div>
       )}
     )
