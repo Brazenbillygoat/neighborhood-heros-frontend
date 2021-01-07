@@ -27,14 +27,19 @@ class UserContainer extends Component {
     })
   }
 
-  unFriend = () => {
-    console.log("You unfriended me");
+  unFriend = (userId) => {
+    let notFriends = {
+      followed_id: JSON.parse(localStorage.getItem("myId")).id,
+      follower_id: userId
+    };
+
+    
   }
 
   showAddOrRemoveFriendButton = (user) => {
     const sessionUser = JSON.parse(localStorage.getItem("myId"));
-    // debugger
     let isFriend = false;
+
     sessionUser.followers.forEach((friend) => {
       if (friend.followed_id === user.id || friend.follower_id === user.id) {
         return isFriend = true;
@@ -45,7 +50,7 @@ class UserContainer extends Component {
         return isFriend = true;
       };
     });
-    debugger
+    
     if (isFriend) {
       return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
     } else {
