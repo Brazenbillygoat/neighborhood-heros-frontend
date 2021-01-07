@@ -15,7 +15,7 @@ class UserContainer extends Component {
       followed_id: userId
     };
     fetch(`${this.baseUrl}/relationship/friend`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -32,8 +32,14 @@ class UserContainer extends Component {
       followed_id: JSON.parse(localStorage.getItem("myId")).id,
       follower_id: userId
     };
-
     
+    fetch(`${this.baseUrl}/relationship/unfriend`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(notFriends)
+    })
   }
 
   showAddOrRemoveFriendButton = (user) => {
