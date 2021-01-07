@@ -33,18 +33,23 @@ class UserContainer extends Component {
 
   showAddOrRemoveFriendButton = (user) => {
     const sessionUser = JSON.parse(localStorage.getItem("myId"));
-    debugger
+    // debugger
     let isFriend = false;
     sessionUser.followers.forEach((friend) => {
       if (friend.followed_id === user.id || friend.follower_id === user.id) {
         return isFriend = true;
       };
     });
-
+    sessionUser.followed.forEach((friend) => {
+      if (friend.followed_id === user.id || friend.follower_id === user.id) {
+        return isFriend = true;
+      };
+    });
+    debugger
     if (isFriend) {
-      return <button onClick={(e) => this.beFriend(user.id)}>Add Friend</button>
-    } else {
       return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
+    } else {
+      return <button onClick={(e) => this.beFriend(user.id)}>Add Friend</button>
     }
   }
 
