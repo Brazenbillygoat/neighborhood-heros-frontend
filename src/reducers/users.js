@@ -16,9 +16,9 @@ const usersReducer = (state = [], action) => {
     case 'GETUSERS':
       return action.payload;
     case 'ADDFRIEND':
-      let sessionUser = state.find(user => user.id === action.payload.follower_id);
-      sessionUser.followers.push(action.payload);
-      return state;
+      // let sessionUser = state.find(user => user.id === action.payload.follower_id);
+      // sessionUser.followers.push(action.payload);
+      return action.payload;
     default:
       return state;
   };

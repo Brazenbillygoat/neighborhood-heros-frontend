@@ -16,7 +16,10 @@ class UserContainer extends Component {
       followed_id: userId
     };
     //dispatch an action to update the state
-    this.props.addFriend(friends)
+    let sessionUser = this.props.users.find(user => user.id === JSON.parse(localStorage.getItem("myId")).id)
+    sessionUser.followers.push(friends);
+    let newState = [...this.props.users];
+    this.props.addFriend(newState);
     fetch(`${this.baseUrl}/relationship/friend`, {
       method: "POST",
       headers: {
@@ -46,9 +49,8 @@ class UserContainer extends Component {
   }
 
   showAddOrRemoveFriendButton = (user) => {
-    const sessionUser = JSON.parse(localStorage.getItem("myId"));
+    const sessionUser = this.props.users.find((thisUser) => thisUser.id === JSON.parse(localStorage.getItem("myId")).id);
     let isFriend = false;
-
     sessionUser.followers.forEach((friend) => {
       if (friend.followed_id === user.id || friend.follower_id === user.id) {
         return isFriend = true;
@@ -59,7 +61,6 @@ class UserContainer extends Component {
     //     return isFriend = true;
     //   };
     // });
-    
     if (isFriend) {
       return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
     } else {
