@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { showUser } from '../actions/showUser';
+import { addFriend } from '../actions/users';
 import { bindActionCreators } from 'redux';
 
 
@@ -14,6 +15,8 @@ class UserContainer extends Component {
       follower_id: JSON.parse(localStorage.getItem("myId")).id,
       followed_id: userId
     };
+    //dispatch an action to update the state
+    this.props.addFriend(friends)
     fetch(`${this.baseUrl}/relationship/friend`, {
       method: "POST",
       headers: {
@@ -51,11 +54,11 @@ class UserContainer extends Component {
         return isFriend = true;
       };
     });
-    sessionUser.followed.forEach((friend) => {
-      if (friend.followed_id === user.id || friend.follower_id === user.id) {
-        return isFriend = true;
-      };
-    });
+    // sessionUser.followed.forEach((friend) => {
+    //   if (friend.followed_id === user.id || friend.follower_id === user.id) {
+    //     return isFriend = true;
+    //   };
+    // });
     
     if (isFriend) {
       return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
@@ -109,7 +112,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    showUser: showUser
+    showUser: showUser,
+    addFriend: addFriend
   }, dispatch)
 }
 

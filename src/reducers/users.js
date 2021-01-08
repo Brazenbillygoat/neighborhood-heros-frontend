@@ -15,6 +15,10 @@ const usersReducer = (state = [], action) => {
   switch(action.type){
     case 'GETUSERS':
       return action.payload;
+    case 'ADDFRIEND':
+      let sessionUser = state.find(user => user.id === action.payload.follower_id);
+      sessionUser.followers.push(action.payload);
+      return state;
     default:
       return state;
   };
