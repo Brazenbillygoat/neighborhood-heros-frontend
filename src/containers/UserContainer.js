@@ -64,8 +64,10 @@ class UserContainer extends Component {
     }
   }
 
-  tournamentsForUser = () => {
-
+  tournamentsForUser = (user) => {
+    return user.tournaments.map((tournament) => {
+      return <li>{tournament.name}</li>
+    })
   }
   
   createUserList() {
@@ -80,9 +82,7 @@ class UserContainer extends Component {
             <div className="col-sm-6">
               <h4> Tournaments Joined:</h4>
               <ul>
-                <li>
-
-                </li>
+                {this.tournamentsForUser(user)}
               </ul>
             </div>
           </div>
