@@ -6,7 +6,12 @@ const addFriend = (users) => {
   }
 }
 
-const removeFriend
+const removeFriend = (users) => {
+  return {
+    type: 'REMOVEFRIEND',
+    payload: users
+  }
+}
 
 
 export {
