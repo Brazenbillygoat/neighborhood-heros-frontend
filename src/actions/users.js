@@ -6,7 +6,10 @@ const addFriend = (users) => {
   }
 }
 
+const removeFriend
+
 
 export {
-  addFriend
+  addFriend,
+  removeFriend
 };
