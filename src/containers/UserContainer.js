@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { showUser } from '../actions/showUser';
-import { addFriend } from '../actions/users';
+import { addFriend, removeFriend } from '../actions/users';
 import { bindActionCreators } from 'redux';
 
 
@@ -15,9 +15,10 @@ class UserContainer extends Component {
       follower_id: JSON.parse(localStorage.getItem("myId")).id,
       followed_id: userId
     };
-    //dispatch an action to update the state
-    let sessionUser = this.props.users.find(user => user.id === JSON.parse(localStorage.getItem("myId")).id)
+    let sessionUser = this.props.users.find(user => user.id === JSON.parse(localStorage.getItem("myId")).id);
     sessionUser.followers.push(friends);
+    //I have to make a shallow copy of the state and pass that through via dispatch
+    //in order to trigger a rerender
     let newState = [...this.props.users];
     this.props.addFriend(newState);
     fetch(`${this.baseUrl}/relationship/friend`, {
@@ -27,10 +28,6 @@ class UserContainer extends Component {
       },
       body: JSON.stringify(friends)
     })
-    .then(res => res.json())
-    .then(friendship => {
-      console.log(friendship)
-    })
   }
 
   unFriend = (userId) => {
@@ -38,7 +35,11 @@ class UserContainer extends Component {
       followed_id: JSON.parse(localStorage.getItem("myId")).id,
       follower_id: userId
     };
-    
+
+    let sessionUser = this.props.users.find(user => user.id === JSON.parse(localStorage.getItem("myId")).id);
+    sessionUser.followers = sessionUser.followers.filter(follower => follower.followed_id !== userId);
+    let newState = [...this.props.users];
+    this.props.removeFriend(newState)
     fetch(`${this.baseUrl}/relationship/unfriend`, {
       method: "POST",
       headers: {
@@ -114,7 +115,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     showUser: showUser,
-    addFriend: addFriend
+    addFriend: addFriend,
+    removeFriend: removeFriend
   }, dispatch)
 }
 
