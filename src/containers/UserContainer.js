@@ -57,11 +57,6 @@ class UserContainer extends Component {
         return isFriend = true;
       };
     });
-    // sessionUser.followed.forEach((friend) => {
-    //   if (friend.followed_id === user.id || friend.follower_id === user.id) {
-    //     return isFriend = true;
-    //   };
-    // });
     if (isFriend) {
       return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
     } else {
