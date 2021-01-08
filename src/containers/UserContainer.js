@@ -38,6 +38,7 @@ class UserContainer extends Component {
 
     let sessionUser = this.props.users.find(user => user.id === JSON.parse(localStorage.getItem("myId")).id);
     sessionUser.followers = sessionUser.followers.filter(follower => follower.followed_id !== userId);
+    sessionUser.followed = sessionUser.followed.filter(followed => followed.follower_id !== userId);
     let newState = [...this.props.users];
     this.props.removeFriend(newState)
     fetch(`${this.baseUrl}/relationship/unfriend`, {
@@ -57,6 +58,11 @@ class UserContainer extends Component {
         return isFriend = true;
       };
     });
+    sessionUser.followed.forEach((friend) => {
+      if (friend.followed_id === user.id || friend.follower_id === user.id) {
+        return isFriend = true;
+      };
+    });
     if (isFriend) {
       return <button onClick={(e) => this.unFriend(user.id)}>Remove Friend</button>
     } else {
@@ -72,23 +78,25 @@ class UserContainer extends Component {
   
   createUserList() {
     return this.props.users.map((user) => {
-      return(
-        <div className="user-card col-md-5 container">
-          <div className="users-container row" key={user.id} myKey={user.id}>
-            <div className="col-sm-6">
-              <img src={user.profile_pic} className="user-list-profile-pic" />
-              <p onClick={() => this.props.showUser(user)}>{user.username}</p>
+      if (user.id !== JSON.parse(localStorage.getItem("myId")).id) {    
+        return(
+          <div className="user-card col-md-5 container">
+            <div className="users-container row" key={user.id} myKey={user.id}>
+              <div className="col-sm-6">
+                <img src={user.profile_pic} className="user-list-profile-pic" />
+                <p onClick={() => this.props.showUser(user)}>{user.username}</p>
+              </div>
+              <div className="col-sm-6">
+                <h4> Tournaments Joined:</h4>
+                <ul>
+                  {this.tournamentsForUser(user)}
+                </ul>
+              </div>
             </div>
-            <div className="col-sm-6">
-              <h4> Tournaments Joined:</h4>
-              <ul>
-                {this.tournamentsForUser(user)}
-              </ul>
-            </div>
+            {this.showAddOrRemoveFriendButton(user)}
           </div>
-          {this.showAddOrRemoveFriendButton(user)}
-        </div>
-      )}
+        )}
+      }
     )
   }
 
