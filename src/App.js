@@ -24,6 +24,9 @@ function App() {
   const winners = useSelector(state => state.winners);
   const dispatch = useDispatch();
 
+  // const baseUrl = "http://localhost:3000";
+  const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+
   //this is a helper method for deciding to send the client to the login page or to  the home page
   //depending on whether the client is logged in as a user
   const logInOrHome = () => {
@@ -38,13 +41,13 @@ function App() {
   //loads users and tournaments into state
   const loggedIn = () => {
     if (localStorage.getItem("myId")) {
-      fetch('http://localhost:3000/users')
+      fetch(`${baseUrl}/users`)
       .then(res => res.json())
       .then(users => {
         dispatch(getUsers(users));
       })
 
-      fetch('http://localhost:3000/tournaments')
+      fetch(`${baseUrl}/tournaments`)
       .then(res => res.json())
       .then(tournaments => {
         let endedTournaments = [];
