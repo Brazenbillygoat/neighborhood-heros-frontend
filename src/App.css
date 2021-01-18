@@ -122,6 +122,18 @@ body {
   margin-top: 20%;
 }
 
+#fetching-errors {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  color: rgb(241, 104, 104);
+  padding-left: .5rem;
+  padding-right: .5rem;
+  position: absolute;
+  top: 15rem;
+  left: 40%;
+  width: auto;
+}
+
 
 /* TOURNAMENT(S) */
 
