@@ -1,7 +1,7 @@
 
 const initializer = {
-  username: "",
-  password: "",
+  username: "Jonathan",
+  password: "password",
   confirmPassword: ""
 };
 
