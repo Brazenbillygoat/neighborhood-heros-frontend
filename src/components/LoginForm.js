@@ -146,7 +146,7 @@ function LoginForm() {
   }
 
   const passwordConfirmation = () => {
-    if (!userExists) {
+    if (userExists) {
       return (
         <div>
           <label>
@@ -163,6 +163,7 @@ function LoginForm() {
                     type="password" 
                     value={myConfirmPassword}
                     onChange={(e) => dispatch(confirmPassword(e.target.value))}
+                    required
               />
           </label>  
         </div>
@@ -175,6 +176,7 @@ function LoginForm() {
               type="password" 
               value={myPassword}
               onChange={(e) => dispatch(password(e.target.value))}
+              required
         />
       </label>
     )
@@ -193,6 +195,7 @@ function LoginForm() {
                    type="text" 
                    value={myUsername} 
                    onChange={(e) => dispatch(username(e.target.value))} 
+                   required
             />
           </label>
           <br/>
