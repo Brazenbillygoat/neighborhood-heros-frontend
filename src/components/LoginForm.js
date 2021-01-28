@@ -73,7 +73,9 @@ function LoginForm() {
               parseInt(endDateArray[4])
             )
             if (endDate.getTime() >= Date.now()) {
-              activeTournaments.push(tournament)
+              activeTournaments.push(tournament);
+            } else {
+              endedTournaments.push(tournament);
             }
           })
           dispatch(getTournaments(activeTournaments));
@@ -98,7 +100,6 @@ function LoginForm() {
       name: myUsername,
       password: myPassword
     }
-    
     fetch(`${baseUrl}/login`, {
       method: 'POST',
       headers: {
@@ -113,28 +114,30 @@ function LoginForm() {
       .then(users => {
         dispatch(getUsers(users));
       })
-      fetch(`${baseUrl}/tournaments`)
-      .then(res => res.json())
-      .then(tournaments => {
-        let endedTournaments = [];
-        let activeTournaments = [];
-        tournaments.forEach((tournament) => {
-          console.log(tournaments)
-          let endDateArray = tournament.end_date.split(/\D+/);
-          let endDate = new Date(
-            parseInt(endDateArray[0]),
-            parseInt(endDateArray[1] - 1),
-            parseInt(endDateArray[2]),
-            parseInt(endDateArray[3]),
-            parseInt(endDateArray[4])
-          )
-          if (endDate.getTime() >= Date.now()) {
-            activeTournaments.push(tournament)
-          }
-        })
-        dispatch(getTournaments(activeTournaments));
-        dispatch(pastTournaments(endedTournaments));
-      })
+      // fetch(`${baseUrl}/tournaments`)
+      // .then(res => res.json())
+      // .then(tournaments => {
+      //   let endedTournaments = [];
+      //   let activeTournaments = [];
+      //   tournaments.forEach((tournament) => {
+      //     let endDateArray = tournament.end_date.split(/\D+/);
+      //     let endDate = new Date(
+      //       parseInt(endDateArray[0]),
+      //       parseInt(endDateArray[1] - 1),
+      //       parseInt(endDateArray[2]),
+      //       parseInt(endDateArray[3]),
+      //       parseInt(endDateArray[4])
+      //     )
+      //     console.log(endDate)
+      //     if (endDate.getTime() >= Date.now()) {
+      //       activeTournaments.push(tournament);
+      //     } else {
+      //       endedTournaments.push(tournament);
+      //     }
+      //   })
+      //   dispatch(getTournaments(activeTournaments));
+      //   dispatch(pastTournaments(endedTournaments));
+      // })
       localStorage.setItem("myId", JSON.stringify(user))
       window.location.href="/home";
     })

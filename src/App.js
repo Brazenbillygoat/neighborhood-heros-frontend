@@ -62,10 +62,11 @@ function App() {
             parseInt(endDateArray[3]),
             parseInt(endDateArray[4])
           )
+          
           if (endDate.getTime() >= Date.now()) {
             activeTournaments.push(tournament)
           } else {
-            // endedTournaments.push(tournament)
+            endedTournaments.push(tournament)
           }
         })
         dispatch(getTournaments(activeTournaments));
