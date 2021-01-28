@@ -16,11 +16,24 @@ export default function HomeContainer() {
     //   })
     // }
 
+    //need the points brought closer to top level of API
     const displayWinner = () => {
+      let tournamentWinner = "";
+      let winnerPoints = 0;
       for (let tournament of pastTournaments) {
+        tournament.users.forEach((user) => {
+          let currentPoints = 0;
+          user.tasks.forEach((task) => {
+            currentPoints += task.points;
+          })
+          if (currentPoints > winnerPoints) {
+            winnerPoints = currentPoints;
+            tournamentWinner = user.name;
+          }
+        })
         return (
           <>
-            <p>The "{tournament.name}" tournament was won by !</p>
+            <p>The "{tournament.name}" tournament was won by {tournamentWinner}!</p>
           </>
         )
       }
