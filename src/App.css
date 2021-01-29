@@ -269,11 +269,14 @@ body {
   border-radius: 10px;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
   opacity: .85;
   padding-top: 1rem;
   padding-bottom: 2rem;
+  width: auto;
+}
+
+div.user-card ~ div {
+  height: 500px;
 }
 
 .user-list-profile-pic {

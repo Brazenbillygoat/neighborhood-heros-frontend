@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 class TournamentContainer extends Component {
   
   
-  // baseUrl = "http://localhost:3000";
-  baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+  baseUrl = "http://localhost:3000";
+  // baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   joinTournament = (e) => {
     let participant = {

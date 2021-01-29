@@ -7,8 +7,8 @@ import { bindActionCreators } from 'redux';
 
 
 class UserContainer extends Component {
-  // baseUrl = "http://localhost:3000";
-  baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+  baseUrl = "http://localhost:3000";
+  // baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   beFriend = (userId) => {
     let friends = {
@@ -80,20 +80,22 @@ class UserContainer extends Component {
     return this.props.users.map((user) => {
       if (user.id !== JSON.parse(localStorage.getItem("myId")).id) {    
         return(
-          <div className="user-card col-md-5 container">
-            <div className="users-container row" key={user.id} myKey={user.id}>
-              <div className="col-sm-6">
-                <img src={user.profile_pic} className="user-list-profile-pic" />
-                <p onClick={() => this.props.showUser(user)}>{user.username}</p>
+          <div class="col-md-6">
+            <div className="user-card container">
+              <div className="users-container row" key={user.id} myKey={user.id}>
+                <div className="col-sm-6">
+                  <img src={user.profile_pic} className="user-list-profile-pic" />
+                  <p onClick={() => this.props.showUser(user)}>{user.username}</p>
+                </div>
+                <div className="col-sm-6">
+                  <h4> Tournaments Joined:</h4>
+                  <ul>
+                    {this.tournamentsForUser(user)}
+                  </ul>
+                </div>
               </div>
-              <div className="col-sm-6">
-                <h4> Tournaments Joined:</h4>
-                <ul>
-                  {this.tournamentsForUser(user)}
-                </ul>
-              </div>
+              {this.showAddOrRemoveFriendButton(user)}
             </div>
-            {this.showAddOrRemoveFriendButton(user)}
           </div>
         )}
       }
@@ -103,7 +105,9 @@ class UserContainer extends Component {
   render() {
     return (
       <div className="container">
-        {this.createUserList()}
+        <div class="row">
+          {this.createUserList()}
+        </div>
       </div>
     )
   }
