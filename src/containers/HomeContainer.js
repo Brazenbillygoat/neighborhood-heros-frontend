@@ -18,9 +18,9 @@ export default function HomeContainer() {
 
     //need the points brought closer to top level of API
     const displayWinner = () => {
-      let tournamentWinner = "";
-      let winnerPoints = 0;
       return pastTournaments.map((tournament) => {
+        let tournamentWinner = "";
+        let winnerPoints = 0;
         tournament.users.forEach((user) => {
           let currentPoints = 0;
           user.tasks.forEach((task) => {
