@@ -20,7 +20,7 @@ export default function HomeContainer() {
     const displayWinner = () => {
       let tournamentWinner = "";
       let winnerPoints = 0;
-      for (let tournament of pastTournaments) {
+      return pastTournaments.map((tournament) => {
         tournament.users.forEach((user) => {
           let currentPoints = 0;
           user.tasks.forEach((task) => {
@@ -36,7 +36,7 @@ export default function HomeContainer() {
             <p>The "{tournament.name}" tournament was won by {tournamentWinner}!</p>
           </>
         )
-      }
+      })
     }
 
     return (
