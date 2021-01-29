@@ -28,7 +28,7 @@ export default function HomeContainer() {
           })
           if (currentPoints > winnerPoints) {
             winnerPoints = currentPoints;
-            tournamentWinner = user.name;
+            tournamentWinner = user.username;
           }
         })
         return (
