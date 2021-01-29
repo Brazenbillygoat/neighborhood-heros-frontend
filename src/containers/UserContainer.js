@@ -88,7 +88,7 @@ class UserContainer extends Component {
                   <p onClick={() => this.props.showUser(user)}>{user.username}</p>
                 </div>
                 <div className="col-sm-6">
-                  <h4> Tournaments Joined:</h4>
+                  <h4 class="users-tournaments-title"> Tournaments Joined:</h4>
                   <ul class="users-tournaments">
                     {this.tournamentsForUser(user)}
                   </ul>

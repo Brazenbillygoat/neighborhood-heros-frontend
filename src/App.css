@@ -284,8 +284,12 @@ body {
   width: 35%;
 }
 
+.users-tournaments-title {
+  /* text-align: left; */
+}
+
 .users-tournaments {
+  display: inline-block;
   list-style-type: circle;
-  /* margin-left: 2rem; */
   text-align: left;
 }
