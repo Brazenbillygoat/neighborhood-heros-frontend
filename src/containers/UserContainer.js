@@ -80,7 +80,7 @@ class UserContainer extends Component {
     return this.props.users.map((user) => {
       if (user.id !== JSON.parse(localStorage.getItem("myId")).id) {    
         return(
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div className="user-card container">
               <div className="users-container row" key={user.id} myKey={user.id}>
                 <div className="col-sm-6">
@@ -89,7 +89,7 @@ class UserContainer extends Component {
                 </div>
                 <div className="col-sm-6">
                   <h4> Tournaments Joined:</h4>
-                  <ul>
+                  <ul class="users-tournaments">
                     {this.tournamentsForUser(user)}
                   </ul>
                 </div>
