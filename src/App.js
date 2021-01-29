@@ -24,8 +24,8 @@ function App() {
   const winners = useSelector(state => state.winners);
   const dispatch = useDispatch();
 
-  // const baseUrl = "http://localhost:3000";
-  const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+  const baseUrl = "http://localhost:3000";
+  // const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   //this is a helper method for deciding to send the client to the login page or to  the home page
   //depending on whether the client is logged in as a user
@@ -53,6 +53,7 @@ function App() {
         let endedTournaments = [];
         let activeTournaments = [];
         //dividing tournaments into active or past depending on enddate
+        // debugger
         tournaments.forEach((tournament) => {
           let endDateArray = tournament.end_date.split(/\D+/);
           let endDate = new Date(
@@ -66,6 +67,7 @@ function App() {
           if (endDate.getTime() >= Date.now()) {
             activeTournaments.push(tournament)
           } else {
+            // debugger
             endedTournaments.push(tournament)
           }
         })
