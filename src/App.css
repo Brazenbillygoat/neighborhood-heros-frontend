@@ -284,10 +284,6 @@ body {
   width: 35%;
 }
 
-.users-tournaments-title {
-  /* text-align: left; */
-}
-
 .users-tournaments {
   display: inline-block;
   list-style-type: circle;
