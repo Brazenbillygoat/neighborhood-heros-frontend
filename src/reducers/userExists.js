@@ -1,5 +1,5 @@
 
-export default function (state = false, action) {
+export default function (state = true, action) {
   switch(action.type) {
     case 'SIGNUPORLOGIN':
       return !state

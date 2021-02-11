@@ -57,7 +57,7 @@ function Navbar() {
     if (localStorage.getItem("myId")) {
       return <p class="logout-or-login" onClick={() => localStorage.clear()}>Log out</p>
     }
-    return userExists ? "Log in" : "Sign up"
+    return !userExists ? "Log in" : "Sign up"
   }
 
   const isLoggedIn = () => {

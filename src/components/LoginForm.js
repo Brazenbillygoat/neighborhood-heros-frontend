@@ -19,11 +19,11 @@ function LoginForm() {
   // const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   const showLoginOrSignup = () => {
-    return !userExists ? "Log in" : "Sign up";
+    return userExists ? "Log in" : "Sign up";
   }
 
   const loginOrCreate = (e) => {
-    return !userExists ? logUserIn(e) : createNewUser(e);
+    return userExists ? logUserIn(e) : createNewUser(e);
   }
 
   const passwordsMatchOnSignup = () => {
@@ -126,7 +126,7 @@ function LoginForm() {
   }
 
   const passwordConfirmation = () => {
-    if (userExists) {
+    if (!userExists) {
       return (
         <div>
           <label>
