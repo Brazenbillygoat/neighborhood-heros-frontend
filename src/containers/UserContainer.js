@@ -7,8 +7,8 @@ import { bindActionCreators } from 'redux';
 
 
 class UserContainer extends Component {
-  baseUrl = "http://localhost:3000";
-  // baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
+  // baseUrl = "http://localhost:3000";
+  baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
 
   beFriend = (userId) => {
     let friends = {
