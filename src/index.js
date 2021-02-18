@@ -7,12 +7,6 @@ import allReducers from './reducers';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-const {
-  BrowserRouter,
-  Route,
-  Link
-} = Router
-
 const store = createStore(
   allReducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

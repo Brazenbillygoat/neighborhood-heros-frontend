@@ -116,11 +116,11 @@ const ShowTournament = () => {
     //the code below is for updating a users profile when they log a task
     //but I have yet to build that feature
 
-    // let userToAttribute = selectedTournament.users.forEach((user) => {
-    //   if (user.id === JSON.parse(localStorage.getItem("myId")).id) {
-    //     user.tasks.push(taskToLog)
-    //   }
-    // })
+    selectedTournament.users.forEach((user) => {
+      if (user.id === JSON.parse(localStorage.getItem("myId")).id) {
+        return user.tasks.push(taskToLog)
+      }
+    })
 
     let task = {
       task_name: e.currentTarget.parentNode.children[0].innerText,
@@ -131,7 +131,6 @@ const ShowTournament = () => {
     updatedUser.tasks.push(taskToLog)
     localStorage.setItem("myId", JSON.stringify(updatedUser))
     // userToAttribute.tasks.push(taskToLog)
-    
 
     fetch(`${baseUrl}/completedtasks/log`, {
       method: 'POST',
@@ -142,13 +141,11 @@ const ShowTournament = () => {
     })
     .then(res => res.json())
     .then(data => {
-      
       dispatch(addPoints(5))
     })
   }
 
   const calculateUserPoints = (userId) => {
-    
     let total = 0;
       selectedTournament.users.forEach((user) => {
         if (user.id === userId) {
@@ -235,7 +232,7 @@ const ShowTournament = () => {
       )
     })
   }
-
+  
   const listTasks = () => {
       try {
         return selectedTournament.tasks.map((task) => {
