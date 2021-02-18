@@ -1,4 +1,3 @@
-import { tournamentStartDate } from "./tournamentForm"
 
 export const getTournaments = (tournaments) => {
   return {

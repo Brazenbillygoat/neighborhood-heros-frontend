@@ -1,6 +1,6 @@
 
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getUsers } from './actions';
 import { getTournaments, pastTournaments } from './actions/tournaments';
 // import { addWinners } from './actions/winners';
