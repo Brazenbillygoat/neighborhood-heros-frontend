@@ -1,22 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { proxyUpdate } from '../actions/proxy';
 import { showTournament, getTournaments } from '../actions/tournaments';
 import { addPoints } from '../actions/myPoints';
-import { useEffect } from 'react';
-
 
 
 const ShowTournament = () => {
 
   const dispatch = useDispatch();
 
-  const users = useSelector(state => state.users);
-  const tournaments = useSelector(state => state.tournaments);
   const selectedTournament = useSelector(state => state.selectedTournament);
   const tournament = JSON.parse(localStorage.getItem("showTournament"));
-  const myPoints = useSelector(state => state.myPoints);
-
 
   const baseUrl = "http://localhost:3000";
   // const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
@@ -72,7 +65,7 @@ const ShowTournament = () => {
   }
 
   const showDeleteLink = (task) => {
-    if (task.creator_id == JSON.parse(localStorage.getItem("myId")).id) {
+    if (task.creator_id === JSON.parse(localStorage.getItem("myId")).id) {
       return <Link 
           className="log-task-link" 
           onClick={deleteTask}
@@ -83,7 +76,7 @@ const ShowTournament = () => {
   }
 
   const showCreateTaskButton = () => {
-    if (selectedTournament.creator_id == JSON.parse(localStorage.getItem("myId")).id) {
+    if (selectedTournament.creator_id === JSON.parse(localStorage.getItem("myId")).id) {
       return (
       <Link 
         className="tournament-button btn"
@@ -100,7 +93,7 @@ const ShowTournament = () => {
     let task = {
       task_id: taskId
     }
-    selectedTournament.tasks = selectedTournament.tasks.filter((task) => task.id != taskId);
+    selectedTournament.tasks = selectedTournament.tasks.filter((task) => task.id !== taskId);
     
 
     fetch(`${baseUrl}/tasks/delete`, {
@@ -117,7 +110,8 @@ const ShowTournament = () => {
 
   const logTask = (e) => {
     let taskToLog = selectedTournament.tasks.find((task) => {
-      return task.id == e.currentTarget.parentNode.getAttribute("myKey")
+      debugger
+      return task.id == parseInt(e.currentTarget.parentNode.getAttribute("myKey"))
     })
     let userToAttribute = selectedTournament.users.forEach((user) => {
       if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
