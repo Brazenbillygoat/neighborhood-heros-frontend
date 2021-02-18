@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export default function HomeContainer() {
-  const winners = useSelector(state => state.winners); //refactor me out
   const pastTournaments = useSelector(state => state.pastTournaments);
   
 
