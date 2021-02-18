@@ -4,7 +4,6 @@ import { signupOrLogin } from '../actions/loginForm';
 import { Link } from 'react-router-dom';
 import { getUsers } from '../actions';
 import { getTournaments, pastTournaments } from '../actions/tournaments';
-// import { tournamentMembers } from '../actions/tournamentMembers';
 
 
 function Navbar() {
@@ -15,16 +14,6 @@ function Navbar() {
 
   const baseUrl = "http://localhost:3000";
   // const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
-
-  const fetchUsers = () => {
-    if (localStorage.getItem("myId")) {
-      fetch(`${baseUrl}/users`)
-      .then(res => res.json())
-      .then(users => {
-        dispatch(getUsers(users));
-      })
-    }
-  }
 
   const fetchTournaments = () => {
     fetch(`${baseUrl}/tournaments`)
