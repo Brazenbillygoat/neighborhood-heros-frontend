@@ -77,28 +77,27 @@ class UserContainer extends Component {
   }
   
   createUserList() {
-    return this.props.users.map((user) => {
-      if (user.id !== JSON.parse(localStorage.getItem("myId")).id) {    
-        return(
-          <div className="col-md-12">
-            <div className="user-card container">
-              <div className="users-container row" key={user.id} myKey={user.id}>
-                <div className="col-sm-6">
-                  <img src={user.profile_pic} className="user-list-profile-pic" />
-                  <p onClick={() => this.props.showUser(user)}>{user.username}</p>
-                </div>
-                <div className="col-sm-6">
-                  <h4 className="users-tournaments-title"> Tournaments Joined:</h4>
-                  <ul className="users-tournaments">
-                    {this.tournamentsForUser(user)}
-                  </ul>
-                </div>
+    let otherUsers = this.props.users.filter((user) => user.id !== JSON.parse(localStorage.getItem("myId")).id)
+    return otherUsers.map((user) => {
+      return(
+        <div className="col-md-12">
+          <div className="user-card container">
+            <div className="users-container row" key={user.id} myKey={user.id}>
+              <div className="col-sm-6">
+                <img src={user.profile_pic} className="user-list-profile-pic" />
+                <p onClick={() => this.props.showUser(user)}>{user.username}</p>
               </div>
-              {this.showAddOrRemoveFriendButton(user)}
+              <div className="col-sm-6">
+                <h4 className="users-tournaments-title"> Tournaments Joined:</h4>
+                <ul className="users-tournaments">
+                  {this.tournamentsForUser(user)}
+                </ul>
+              </div>
             </div>
+            {this.showAddOrRemoveFriendButton(user)}
           </div>
-        )}
-      }
+        </div>
+      )}
     )
   }
 
