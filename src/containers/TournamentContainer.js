@@ -27,7 +27,7 @@ class TournamentContainer extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      if(data.error == 1) {
+      if(data.error === 1) {
         document.getElementsByClassName("tournament-list-error")[0].removeAttribute("hidden");
         setTimeout(() => {
           document.getElementsByClassName("tournament-list-error")[0].setAttribute("hidden", "true");
@@ -35,7 +35,7 @@ class TournamentContainer extends Component {
       } else {
         document.getElementById(`${data.tournament_id}`).children[2].setAttribute("disabled", "true");
         this.props.tournaments.forEach(tournament => {
-          if (tournament.id == data.tournament_id) {
+          if (tournament.id === data.tournament_id) {
             tournament.users.push(JSON.parse(localStorage.getItem("myId")))
           }
         });
@@ -46,7 +46,7 @@ class TournamentContainer extends Component {
   joinButtonDisabled = (tournament) => {
     let userHasJoined = false;
     tournament.users.forEach( (user) => {
-      if (user.username == JSON.parse(localStorage.getItem("myId")).username) {
+      if (user.username === JSON.parse(localStorage.getItem("myId")).username) {
         userHasJoined = true;
       }
     })
