@@ -16,12 +16,9 @@ import TaskForm from './components/TaskForm';
 import UserContainer from './containers/UserContainer';
 import HomeContainer from './containers/HomeContainer';
 import TournamentContainer from './containers/TournamentContainer';
-import { tournamentDescription } from './actions/tournamentForm';
 
 
 function App() {
-  const isLogged = useSelector(state => state.isLogged);
-  const winners = useSelector(state => state.winners);
   const dispatch = useDispatch();
 
   const baseUrl = "http://localhost:3000";
@@ -53,7 +50,6 @@ function App() {
         let endedTournaments = [];
         let activeTournaments = [];
         //dividing tournaments into active or past depending on enddate
-        // debugger
         tournaments.forEach((tournament) => {
           let endDateArray = tournament.end_date.split(/\D+/);
           let endDate = new Date(
@@ -67,7 +63,6 @@ function App() {
           if (endDate.getTime() >= Date.now()) {
             activeTournaments.push(tournament)
           } else {
-            // debugger
             endedTournaments.push(tournament)
           }
         })
