@@ -2,13 +2,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { signupOrLogin } from '../actions/loginForm';
 import { Link } from 'react-router-dom';
-import { getUsers } from '../actions';
 import { getTournaments, pastTournaments } from '../actions/tournaments';
 
 
 function Navbar() {
   const userExists = useSelector(state => state.userExists);
-  const users = useSelector(state => state.users);
   const dispatch = useDispatch();
 
 
