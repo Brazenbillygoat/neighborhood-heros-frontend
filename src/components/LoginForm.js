@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { username, password, confirmPassword } from '../actions/loginForm';
 import { getUsers } from '../actions';
 import { getTournaments, pastTournaments } from '../actions/tournaments';
-import { Redirect } from 'react-router-dom';
-// import userExists from '../reducers/userExists';
 
 
 function LoginForm() {
@@ -83,7 +81,7 @@ function LoginForm() {
         })
         localStorage.setItem("myId", JSON.stringify(user))
         localStorage.setItem("username", user.username)
-        if (localStorage.getItem("myId") != "undefined") {
+        if (localStorage.getItem("myId") !== "undefined") {
           window.location.href="/home";
         }
 
