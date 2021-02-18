@@ -10,6 +10,7 @@ const ShowTournament = () => {
 
   const selectedTournament = useSelector(state => state.selectedTournament);
   const tournament = JSON.parse(localStorage.getItem("showTournament"));
+  const myPoints = useSelector(state => state.myPoints);
 
   const baseUrl = "http://localhost:3000";
   // const baseUrl = "https://neighborhood-heroes-backend.herokuapp.com";
