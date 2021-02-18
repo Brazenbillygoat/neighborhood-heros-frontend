@@ -110,14 +110,17 @@ const ShowTournament = () => {
 
   const logTask = (e) => {
     let taskToLog = selectedTournament.tasks.find((task) => {
-      debugger
-      return task.id == parseInt(e.currentTarget.parentNode.getAttribute("myKey"))
+      return task.id === parseInt(e.currentTarget.parentNode.getAttribute("myKey"))
     })
-    let userToAttribute = selectedTournament.users.forEach((user) => {
-      if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
-        user.tasks.push(taskToLog)
-      }
-    })
+    
+    //the code below is for updating a users profile when they log a task
+    //but I have yet to build that feature
+
+    // let userToAttribute = selectedTournament.users.forEach((user) => {
+    //   if (user.id === JSON.parse(localStorage.getItem("myId")).id) {
+    //     user.tasks.push(taskToLog)
+    //   }
+    // })
 
     let task = {
       task_name: e.currentTarget.parentNode.children[0].innerText,
