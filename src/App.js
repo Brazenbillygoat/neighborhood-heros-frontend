@@ -5,7 +5,7 @@ import { getUsers } from './actions';
 import { getTournaments, pastTournaments } from './actions/tournaments';
 // import { addWinners } from './actions/winners';
 import { Route, Switch, } from 'react-router';
-import { BrowserRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import LoginForm from './components/LoginForm';
 import Navbar from './components/Navbar';
