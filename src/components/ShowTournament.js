@@ -112,7 +112,7 @@ const ShowTournament = () => {
     let taskToLog = selectedTournament.tasks.find((task) => {
       return task.id === parseInt(e.currentTarget.parentNode.getAttribute("myKey"))
     })
-    
+
     //the code below is for updating a users profile when they log a task
     //but I have yet to build that feature
 
@@ -151,9 +151,9 @@ const ShowTournament = () => {
     
     let total = 0;
       selectedTournament.users.forEach((user) => {
-        if (user.id == userId) {
+        if (user.id === userId) {
           user.tasks.forEach((task) => {
-            if (task.tournament_id == selectedTournament.id) {
+            if (task.tournament_id === selectedTournament.id) {
               total += task.points
             }
           })
@@ -172,13 +172,13 @@ const ShowTournament = () => {
     if (checkUserIsMember()) {
       let indexToDelete;
       selectedTournament.users.forEach((user, i) => {
-        if (user.id == JSON.parse(localStorage.getItem("myId")).id) {
+        if (user.id === JSON.parse(localStorage.getItem("myId")).id) {
           indexToDelete = i
         }
       })
       selectedTournament.users.splice(indexToDelete, 1)
       let tasksRemoved = JSON.parse(localStorage.getItem("myId")).tasks.filter((task) => {
-        return task.tournament_id != selectedTournament.id
+        return task.tournament_id !== selectedTournament.id
       })
       let updatedUser = JSON.parse(localStorage.getItem("myId"))
       updatedUser.tasks = tasksRemoved
@@ -242,7 +242,7 @@ const ShowTournament = () => {
           return (
             <div  className="showtournament-ul" mykey={task.id} key={task.id}>
               <p class="showtournament-task">{task.name}</p>
-              <a className="log-task-link" onClick={(e) => logTask(e)}>Log Task</a> 
+              <button className="log-task-link" onClick={(e) => logTask(e)}>Log Task</button> 
               <p className="showtournament-task-points">{task.points} points</p>
               {showDeleteLink(task)} 
             </div>
