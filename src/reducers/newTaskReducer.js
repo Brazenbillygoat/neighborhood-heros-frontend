@@ -5,7 +5,7 @@ const initializer = {
   points: 5
 }
 
-export default function (state = initializer, action) {
+export default function updateTask(state = initializer, action) {
   switch(action.type) {
     case 'UPDATETASKNAME':
       return state.name = { ...state, name: action.payload };

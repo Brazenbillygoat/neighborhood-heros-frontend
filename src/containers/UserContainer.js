@@ -84,7 +84,7 @@ class UserContainer extends Component {
             <div className="user-card container">
               <div className="users-container row" key={user.id} myKey={user.id}>
                 <div className="col-sm-6">
-                  <img src={user.profile_pic} className="user-list-profile-pic" alt="User's profile picture."/>
+                  <img src={user.profile_pic} className="user-list-profile-pic" alt="User's profile."/>
                   <p onClick={() => this.props.showUser(user)}>{user.username}</p>
                 </div>
                 <div className="col-sm-6">
